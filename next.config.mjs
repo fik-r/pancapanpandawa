@@ -3,6 +3,9 @@ const nextConfig = {
   experimental: {
     serverActions: {
       bodySizeLimit: '100mb',
+      allowedOrigins: [
+        "pancapandawasukses.id"
+      ]
     },
   },
   images: {
