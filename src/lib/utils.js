@@ -5,5 +5,5 @@ export function cn(...inputs) {
   return twMerge(clsx(inputs));
 }
 
-// export const BASE_URL = "http://localhost:3000"
-export const BASE_URL = "https://pancapandawasukses.id"
+export const BASE_URL = "http://localhost:3000"
+// export const BASE_URL = "https://pancapandawasukses.id"
