@@ -9,19 +9,58 @@ import ComplianceCertification from "@/components/layouts/ComplianceCertificatio
 import Testimonials from "@/components/layouts/Testimonials";
 import ContactForm from "@/components/layouts/ContactForm";
 import { CarouselGallery } from "@/components/layouts/Gallery";
+import { getHomepage } from "@/lib/actions/HomepageActions";
+import { getPartners } from "@/lib/actions/PartnerActions";
+import { getServices } from "@/lib/actions/ServicesActions";
+import { getCertificates } from "@/lib/actions/CertificateActions";
+import { getTestimonials } from "@/lib/actions/TestimonialActions";
+export const dynamic = 'force-dynamic'
 
-export default function Home() {
+export default async function Home() {
+  const [
+    homepageData,
+    partnersData,
+    servicesData,
+    certificateData,
+    testimonialsData,
+  ] = await Promise.all([
+    getHomepage(),
+    getPartners(),
+    getServices(),
+    getCertificates(),
+    getTestimonials()
+  ]);
+  const data = {
+    ...homepageData,
+    partners: {
+      ...homepageData?.partners,
+      items: partnersData
+    },
+    services: {
+      ...homepageData?.services,
+      items: servicesData
+    },
+    certifcates: {
+      ...homepageData?.certificates,
+      items: certificateData
+    },
+    testimonials: {
+      ...homepageData?.testimonials,
+      items: testimonialsData
+    }
+  }
+
   return (
     <div className="flex flex-col relative">
       {/* Navbar */}
       <Navbar />
-      <Hero1 />
-      <Services />
-      <Partners />
+      <Hero1 data={data?.hero} />
+      <Services data={data?.services} />
+      <Partners data={data?.partners} />
       <WhyUs />
-      <ComplianceCertification />
+      <ComplianceCertification data={data?.certifcates} />
       <CarouselGallery />
-      <Testimonials />
+      <Testimonials data={data?.testimonials} />
       <div className="flex flex-col lg:flex-row py-[2.5rem] px-[1.5rem] lg:py-[6.25rem] lg:px-[3.75rem] lg:gap-x-[3rem]">
         <span className="lg:w-[50%] font-bold p-text-heading-sm lg:p-text-display-lg text-dune mb-[1.5rem] lg:mb-[3rem]">Get in touch with us</span>
         <ContactForm />

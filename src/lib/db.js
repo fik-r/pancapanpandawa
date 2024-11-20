@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 
 const MONGO_URI = "mongodb://admin:s3KNX96h8uKKlPZ@%2Fhome%2Fpancapan%2Fmongodb-0.sock";
+// const MONGO_URI = "mongodb://localhost:27017";
 
 if (!MONGO_URI) {
     throw new Error("Please define the MONGO_URI environment variable.");
