@@ -1,8 +1,8 @@
 "use server"
 import 'server-only'
 import { cookies } from 'next/headers'
-import { NextResponse } from 'next/server'
 import UserSchema from "@/models/User"
+import { redirect } from 'next/navigation'
 import { encrypt, decrypt } from '@/lib/actions/SessionActions'
 
 export async function createSession(username) {
@@ -18,7 +18,7 @@ export async function createSession(username) {
         path: '/',
     })
 
-    NextResponse.redirect("/cms")
+    redirect("/cms")
 }
 
 export async function login(data) {
@@ -35,4 +35,5 @@ export async function login(data) {
 export async function deleteSession() {
     const cookieStore = await cookies()
     cookieStore.delete('session')
+    redirect("/login")
 }
