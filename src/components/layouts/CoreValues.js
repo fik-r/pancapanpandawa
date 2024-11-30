@@ -1,18 +1,19 @@
+import { BASE_URL } from "@/lib/utils";
 import Image from "next/image";
-const CoreValues = () => {
+const CoreValues = ({ data }) => {
 
-    const Item = () => {
+    const Item = ({ item }) => {
         return (
             <div className="flex flex-row gap-x-[1.5rem]">
                 <Image
-                    src={"/icons/ic_core.svg"}
+                    src={BASE_URL + item?.image}
                     width={40}
                     height={40}
                     alt="ic_core_value"
                 />
                 <div className="flex flex-col gap-y-[0.5rem]">
-                    <span className="text-white p-text-body-md lg:p-text-body-lg font-semibold">Measurable</span>
-                    <span className="text-white font-normal p-text-body-sm lg:p-text-body-lg">Pekerjaan yang dilakukan harus terukur</span>
+                    <span className="text-white p-text-body-md lg:p-text-body-lg font-semibold">{item?.title}</span>
+                    <span className="text-white font-normal p-text-body-sm lg:p-text-body-lg">{item?.description}</span>
                 </div>
             </div>
         )
@@ -25,12 +26,13 @@ const CoreValues = () => {
                     alt="overlay"
                     className="absolute z-[0]"
                 />
-                <span className="font-bold p-text-heading-sm lg:p-text-display-lg text-white mb-[1.5rem] z-[1]">Core Values</span>
+                <span className="font-bold p-text-heading-sm lg:p-text-display-lg text-white mb-[1.5rem] z-[1]">{data?.title}</span>
                 <div className="flex flex-col lg:grid lg:grid-cols-2 gap-y-[1.5rem] lg:gap-[2.5rem] z-[1]">
-                    <Item />
-                    <Item />
-                    <Item />
-                    <Item />
+                    {data?.items?.map((item, key) => {
+                        return (
+                            <Item item={item} key={key} />
+                        )
+                    })}
                 </div>
             </div>
         </div>

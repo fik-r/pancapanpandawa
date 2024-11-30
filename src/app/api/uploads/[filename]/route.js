@@ -2,7 +2,7 @@ import path from 'path';
 import fs from 'fs';
 
 export async function GET(req, { params }) {
-    const { filename } = params; // Extract the filename from the route params
+    const { filename } = await params; // Extract the filename from the route params
     const filePath = path.join(process.cwd(), 'public/uploads', filename);
 
     if (fs.existsSync(filePath)) {
@@ -46,3 +46,4 @@ export async function GET(req, { params }) {
         });
     }
 }
+

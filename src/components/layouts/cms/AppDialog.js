@@ -12,7 +12,7 @@ export default function AppDialog({ children, isOpen, setIsOpen }) {
     return (
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
             <DialogTitle></DialogTitle>
-            <DialogContent className="sm:max-w-[56.25rem] pt-[3.5rem]">
+            <DialogContent className="sm:max-w-[56.25rem] pt-[3.5rem] max-h-full overflow-auto">
                 {children}
             </DialogContent>
         </Dialog>

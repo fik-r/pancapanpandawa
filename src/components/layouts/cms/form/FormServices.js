@@ -6,6 +6,10 @@ import AppInputGroup from "@/components/layouts/cms/AppInputGroup";
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 import { BASE_URL } from "@/lib/utils";
+import { Label } from "@radix-ui/react-label";
+import AppInput from "@/components/layouts/cms/AppInput";
+import AppWYSIWYG from "@/components/layouts/cms/AppWYSIWYG";
+import { v4 as uuidv4 } from 'uuid';
 
 export function FormServices({ title = "Services", initialData = {}, action }) {
     const [errors, setErrors] = useState({});
@@ -81,9 +85,11 @@ export function FormDatatableServices({ title = "Services", initialData = {}, ac
     const [formData, setFormData] = useState({
         title: initialData?.title || "",
         description: initialData?.description || "",
+        details: initialData?.details || [],
         imageUrl: BASE_URL + initialData?.image || "",
         imageFile: {}
     })
+
     const [preview, setPreview] = useState(initialData?.image ? (BASE_URL + initialData?.image) : null);
 
     function handleSubmit(e) {
@@ -105,14 +111,32 @@ export function FormDatatableServices({ title = "Services", initialData = {}, ac
             }
         });
 
+        // Validate details
+        formData.details.forEach((detail, index) => {
+            if (!detail.title || !detail.html) {
+                newErrors[`details-${index}`] = true;
+                isValid = false;
+            }
+        });
+
+        console.log(formData.details)
+
         setErrors(newErrors);
         if (!isValid) return
+
+        const processedDetails = formData.details.map((detail) => ({
+            ...detail,
+            _id: detail._id || uuidv4() // Use existing id if present, otherwise generate a new one
+        }));
+
         const formDataInSchema = {
             title: formData.title,
             description: formData.description,
             image: formData.imageFile,
-            imageUrl: initialData?.image
+            imageUrl: initialData?.image,
+            details: processedDetails
         }
+
         if (action)
             action(formDataInSchema, initialData._id)
     }
@@ -136,6 +160,32 @@ export function FormDatatableServices({ title = "Services", initialData = {}, ac
         } else {
             setErrors({ ...errors, imageFile: true });
         }
+    }
+
+    function addDetail() {
+        setFormData({
+            ...formData,
+            details: [...formData.details, { title: "", html: "" }]
+        });
+    }
+
+    function handleDetailChange(index, field, value) {
+        const updatedDetails = [...formData.details];
+        updatedDetails[index][field] = value;
+
+        console.log(updatedDetails)
+        setFormData({ ...formData, details: updatedDetails });
+
+        if (value.trim() !== "") {
+            setErrors({ ...errors, [`details-${index}`]: false });
+        } else {
+            setErrors({ ...errors, [`details-${index}`]: true });
+        }
+    }
+
+    function removeDetail(index) {
+        const updatedDetails = formData.details.filter((_, i) => i !== index);
+        setFormData({ ...formData, details: updatedDetails });
     }
 
     return (
@@ -168,6 +218,31 @@ export function FormDatatableServices({ title = "Services", initialData = {}, ac
                     preview={preview}
                     onChange={handleImageChange}
                 />
+                <Label>Detail</Label>
+                {formData.details.map((detail, index) => (
+                    <div key={index} className="flex flex-col gap-2 border p-2 rounded">
+                        <AppInput
+                            placeholder="Detail title"
+                            value={detail.title}
+                            onChange={(e) => handleDetailChange(index, "title", e.target.value)}
+                        />
+                        <AppWYSIWYG
+                            value={detail.html}
+                            onModelChange={(html) => handleDetailChange(index, "html", html)}
+                        />
+                        {errors[`details-${index}`] && <Label className="text-sm text-red-500 px-[0.25rem]">Detail title and content can't be empty!</Label>}
+                        <Button
+                            type="button"
+                            className="bg-red-500 hover:bg-red-600 mt-2"
+                            onClick={() => removeDetail(index)}
+                        >
+                            Remove Detail
+                        </Button>
+                    </div>
+                ))}
+                <div className="text-start">
+                    <Button type="button" className="bg-green-500 hover:bg-green-600" onClick={addDetail}>{"Add Detail"}</Button>
+                </div>
                 <div className="text-end">
                     <Button type="submit">{initialData?._id ? "Update" : "Add"}</Button>
                 </div>

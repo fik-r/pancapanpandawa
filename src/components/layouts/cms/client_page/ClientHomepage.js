@@ -7,38 +7,17 @@ import {
     updatePartnersHomepage,
     updateCertificateHomepage,
     updateTestimonialsHomepage,
+    updateWhyUsHomepage
 } from "@/lib/actions/HomepageActions"
 import FormHero from "@/components/layouts/cms/form/FormHero"
 import { FormServices } from "@/components/layouts/cms/form/FormServices"
 import { FormPartner } from "@/components/layouts/cms/form/FormPartner"
 import { FormCertificate } from "@/components/layouts/cms/form/FormCertificate"
-import { FormTestimonials } from "../form/FormTestimonial"
+import { FormTestimonials } from "@/components/layouts/cms/form/FormTestimonial"
+import { FormWhyUs } from "@/components/layouts/cms/form/FormWhyUs"
 
 export default function ClientHomepage({ data }) {
     const [loading, setLoading] = useState(false)
-
-    // const CardWhyChooseUs = () => {
-    //     return (
-    //         <AppSection title="Why choose use?">
-    //             <form>
-    //                 <div className="grid w-full items-center gap-4">
-    //                     <div className="flex flex-col space-y-1.5">
-    //                         <Label htmlFor="name">Title</Label>
-    //                         <Input id="name" placeholder="Why choose us?" />
-    //                     </div>
-    //                     <div className="flex flex-col space-y-1.5">
-    //                         <Label htmlFor="name">Image</Label>
-    //                         <Input id="name" type="file" />
-    //                     </div>
-    //                     <div className="flex flex-col space-y-1.5">
-    //                         <Label htmlFor="name">1. Text</Label>
-    //                         <Input id="name" placeholder="Input your heading text here.." />
-    //                     </div>
-    //                 </div>
-    //             </form>
-    //         </AppSection>
-    //     )
-    // }
 
     return (
         <Layout>
@@ -68,6 +47,13 @@ export default function ClientHomepage({ data }) {
                         setLoading(false)
                     }} />
 
+                <FormWhyUs
+                    initialData={data?.whyChooseUs}
+                    action={async (data) => {
+                        setLoading(true)
+                        await updateWhyUsHomepage(data)
+                        setLoading(false)
+                    }} />
                 <FormCertificate
                     initialData={data?.certificates}
                     action={async (data) => {

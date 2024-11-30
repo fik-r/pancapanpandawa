@@ -24,7 +24,6 @@ export async function updateHeroHomepage(newData) {
 
         return true;
     } catch (e) {
-        console.log(e)
         return false
     }
 }
@@ -59,6 +58,20 @@ export async function updateTestimonialsHomepage(newData) {
     }
     await updateHomepage(testimonials)
     return true
+}
+
+export async function updateWhyUsHomepage(newData) {
+    try {
+        const urlImage = newData.image.name ? await uploadImage(newData.image) : newData.imageUrl
+        const whyChooseUs = {
+            whyChooseUs: { ...newData, image: urlImage }
+        }
+        await updateHomepage(whyChooseUs)
+
+        return true;
+    } catch (e) {
+        return false
+    }
 }
 
 export async function getHomepage() {

@@ -6,17 +6,27 @@ import AppInputGroup from "@/components/layouts/cms/AppInputGroup";
 import AppInput from "@/components/layouts/cms/AppInput";
 import { BASE_URL } from "@/lib/utils";
 export default function FormHero({ initialData, showHighlight, action }) {
+    const highlightFormData = () => {
+        if (showHighlight) {
+            return {
+                highlight1_label: initialData?.highlight_1?.label || "",
+                highlight1_value: initialData?.highlight_1?.value || "",
+                highlight2_label: initialData?.highlight_2?.label || "",
+                highlight2_value: initialData?.highlight_2?.value || "",
+                highlight3_label: initialData?.highlight_3?.label || "",
+                highlight3_value: initialData?.highlight_3?.value || "",
+            }
+        } else {
+            return {}
+        }
+    }
+
     const [errors, setErrors] = useState({});
     const [formData, setFormData] = useState({
         heading: initialData?.heading || "",
-        highlight1_label: initialData?.highlight_1?.label || "",
-        highlight1_value: initialData?.highlight_1?.value || "",
-        highlight2_label: initialData?.highlight_2?.label || "",
-        highlight2_value: initialData?.highlight_2?.value || "",
-        highlight3_label: initialData?.highlight_3?.label || "",
-        highlight3_value: initialData?.highlight_3?.value || "",
         imageUrl: BASE_URL + initialData?.image || "",
-        imageFile: {}
+        imageFile: {},
+        ...highlightFormData()
     })
     const [preview, setPreview] = useState(initialData?.image ? (BASE_URL + initialData?.image) : null);
     function handleSubmit(e) {
@@ -40,22 +50,29 @@ export default function FormHero({ initialData, showHighlight, action }) {
 
         setErrors(newErrors);
         if (!isValid) return
+        const highlightFormDataInSchema = () => {
+            if (showHighlight) {
+                return {
+                    highlight_1: {
+                        label: formData.highlight1_label,
+                        value: formData.highlight1_value,
+                    },
+                    highlight_2: {
+                        label: formData.highlight2_label,
+                        value: formData.highlight2_value,
+                    },
+                    highlight_3: {
+                        label: formData.highlight3_label,
+                        value: formData.highlight3_value,
+                    },
+                }
+            } else { }
+        }
         const formDataInSchema = {
             heading: formData.heading,
-            highlight_1: {
-                label: formData.highlight1_label,
-                value: formData.highlight1_value,
-            },
-            highlight_2: {
-                label: formData.highlight2_label,
-                value: formData.highlight2_value,
-            },
-            highlight_3: {
-                label: formData.highlight3_label,
-                value: formData.highlight3_value,
-            },
             image: formData.imageFile,
-            imageUrl: initialData?.image
+            imageUrl: initialData?.image,
+            ...highlightFormDataInSchema()
         }
         if (action)
             action(formDataInSchema)
@@ -93,54 +110,58 @@ export default function FormHero({ initialData, showHighlight, action }) {
                     label={"Heading"}
                     onChange={handleInputChange}
                 />
-                <AppInputGroup
-                    id="highlight1_value"
-                    placeholder={"3 years+"}
-                    value={formData.highlight1_value}
-                    isError={errors?.highlight1_value}
-                    label={"Highlight-1"}
-                    onChange={handleInputChange}
-                >
-                    <AppInput
-                        id="highlight1_label"
-                        placeholder={"Trusted service partnership"}
-                        value={formData.highlight1_label}
-                        isError={errors?.highlight1_label}
-                        onChange={handleInputChange}
-                    />
-                </AppInputGroup>
-                <AppInputGroup
-                    id="highlight2_value"
-                    placeholder={"3 years+"}
-                    value={formData.highlight2_value}
-                    isError={errors?.highlight2_value}
-                    label={"Highlight-2"}
-                    onChange={handleInputChange}
-                >
-                    <AppInput
-                        id="highlight2_label"
-                        placeholder={"Trusted service partnership"}
-                        value={formData.highlight2_label}
-                        isError={errors?.highlight2_label}
-                        onChange={handleInputChange}
-                    />
-                </AppInputGroup>
-                <AppInputGroup
-                    id="highlight3_value"
-                    placeholder={"3 years+"}
-                    value={formData.highlight3_value}
-                    isError={errors?.highlight3_value}
-                    label={"Highlight-3"}
-                    onChange={handleInputChange}
-                >
-                    <AppInput
-                        id="highlight3_label"
-                        placeholder={"Trusted service partnership"}
-                        value={formData.highlight3_label}
-                        isError={errors?.highlight3_label}
-                        onChange={handleInputChange}
-                    />
-                </AppInputGroup>
+                {showHighlight &&
+                    <>
+                        <AppInputGroup
+                            id="highlight1_value"
+                            placeholder={"3 years+"}
+                            value={formData.highlight1_value}
+                            isError={errors?.highlight1_value}
+                            label={"Highlight-1"}
+                            onChange={handleInputChange}
+                        >
+                            <AppInput
+                                id="highlight1_label"
+                                placeholder={"Trusted service partnership"}
+                                value={formData.highlight1_label}
+                                isError={errors?.highlight1_label}
+                                onChange={handleInputChange}
+                            />
+                        </AppInputGroup>
+                        <AppInputGroup
+                            id="highlight2_value"
+                            placeholder={"3 years+"}
+                            value={formData.highlight2_value}
+                            isError={errors?.highlight2_value}
+                            label={"Highlight-2"}
+                            onChange={handleInputChange}
+                        >
+                            <AppInput
+                                id="highlight2_label"
+                                placeholder={"Trusted service partnership"}
+                                value={formData.highlight2_label}
+                                isError={errors?.highlight2_label}
+                                onChange={handleInputChange}
+                            />
+                        </AppInputGroup>
+                        <AppInputGroup
+                            id="highlight3_value"
+                            placeholder={"3 years+"}
+                            value={formData.highlight3_value}
+                            isError={errors?.highlight3_value}
+                            label={"Highlight-3"}
+                            onChange={handleInputChange}
+                        >
+                            <AppInput
+                                id="highlight3_label"
+                                placeholder={"Trusted service partnership"}
+                                value={formData.highlight3_label}
+                                isError={errors?.highlight3_label}
+                                onChange={handleInputChange}
+                            />
+                        </AppInputGroup>
+                    </>
+                }
 
                 <AppInputGroup
                     id="image"

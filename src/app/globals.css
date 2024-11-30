@@ -169,3 +169,9 @@
   background: linear-gradient(90deg, rgba(9, 28, 75, 0.80) 0%, rgba(27, 70, 124, 0.80) 100%);
   backdrop-filter: blur(3px);
 }
+
+.content-html p a {
+  color: #045cb4;
+  cursor: pointer;
+  line-height: 1.563rem;
+}

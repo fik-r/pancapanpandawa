@@ -13,6 +13,7 @@ const AppSection = ({ title, children }) => {
             <CardHeader>
                 <CardTitle>{title}</CardTitle>
             </CardHeader>
+
             <CardContent>
                 {children}
             </CardContent>

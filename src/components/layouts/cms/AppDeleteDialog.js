@@ -12,7 +12,6 @@ import {
 import { useRouter } from "next/navigation"
 export function AppDeleteDialog({ isOpen, action, setLoading, setIsOpen, selectedId }) {
     const router = useRouter()
-    console.log(selectedId)
     return (
         <AlertDialog open={isOpen} onOpenChange={setIsOpen}>
             <AlertDialogContent>

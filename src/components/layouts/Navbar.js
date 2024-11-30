@@ -10,9 +10,11 @@ const Navbar = () => {
     return (
         <div className="w-full flex flex-row lg:h-[6.25rem] absolute bg-transparent my-[1rem] px-[1.5rem] lg:my-[1.25rem] lg:px-[3.75rem] z-[99] justify-between items-center lg:justify-normal">
             <div className="relative w-[3.125rem] lg:w-[4rem] h-[3.125rem] lg:h-[4rem] cursor-pointer">
-                <Image src="/icons/ic_logo.png"
-                    layout="fill"
-                    alt="ic_logo" />
+                <Link href="/">
+                    <Image src="/icons/ic_logo.png"
+                        layout="fill"
+                        alt="ic_logo" />
+                </Link>
             </div>
             <div className="flex-grow flex-row justify-center items-center gap-x-[2.5rem] hidden lg:flex">
                 <NavLink text={"About"} cta={"/about"} />

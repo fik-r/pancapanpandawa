@@ -22,8 +22,8 @@ const HomepageSchema = new mongoose.Schema({
         description: { type: String, required: false, default: "" }
     },
     whyChooseUs: {
-        title: { type: String, required: false, default: "" },
-        image: { type: String, required: false, default: "" }
+        image: { type: String, required: false, default: "" },
+        heading: { type: String, required: false, default: "" },
     },
     partners: {
         title: { type: String, required: false, default: "" }

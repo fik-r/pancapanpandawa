@@ -14,6 +14,8 @@ import { getPartners } from "@/lib/actions/PartnerActions";
 import { getServices } from "@/lib/actions/ServicesActions";
 import { getCertificates } from "@/lib/actions/CertificateActions";
 import { getTestimonials } from "@/lib/actions/TestimonialActions";
+import { getReasons } from "@/lib/actions/ReasonActions";
+import { getGallery } from "@/lib/actions/ServiceGalleryActions";
 export const dynamic = 'force-dynamic'
 
 export default async function Home() {
@@ -23,12 +25,16 @@ export default async function Home() {
     servicesData,
     certificateData,
     testimonialsData,
+    reasonsData,
+    galleryData
   ] = await Promise.all([
     getHomepage(),
     getPartners(),
     getServices(),
     getCertificates(),
-    getTestimonials()
+    getTestimonials(),
+    getReasons(),
+    getGallery()
   ]);
   const data = {
     ...homepageData,
@@ -47,6 +53,10 @@ export default async function Home() {
     testimonials: {
       ...homepageData?.testimonials,
       items: testimonialsData
+    },
+    whyChooseUs: {
+      ...homepageData?.whyChooseUs,
+      items: reasonsData
     }
   }
 
@@ -57,9 +67,9 @@ export default async function Home() {
       <Hero1 data={data?.hero} />
       <Services data={data?.services} />
       <Partners data={data?.partners} />
-      <WhyUs />
+      <WhyUs data={data?.whyChooseUs} />
       <ComplianceCertification data={data?.certifcates} />
-      <CarouselGallery />
+      <CarouselGallery data={galleryData} />
       <Testimonials data={data?.testimonials} />
       <div className="flex flex-col lg:flex-row py-[2.5rem] px-[1.5rem] lg:py-[6.25rem] lg:px-[3.75rem] lg:gap-x-[3rem]">
         <span className="lg:w-[50%] font-bold p-text-heading-sm lg:p-text-display-lg text-dune mb-[1.5rem] lg:mb-[3rem]">Get in touch with us</span>

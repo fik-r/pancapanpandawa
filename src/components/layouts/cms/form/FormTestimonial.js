@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button"
 import AppInputGroup from "@/components/layouts/cms/AppInputGroup";
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
-import { BASE_URL } from "@/lib/utils";
 
 export function FormTestimonials({ title = "Testimonials", initialData = {}, action }) {
     const [errors, setErrors] = useState({});

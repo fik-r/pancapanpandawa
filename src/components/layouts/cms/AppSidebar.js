@@ -29,6 +29,21 @@ const items = [
                 url: "/cms",
                 icon: ChevronRight,
             },
+            {
+                title: "About",
+                url: "/cms/about",
+                icon: ChevronRight,
+            },
+            {
+                title: "Service",
+                url: "/cms/service",
+                icon: ChevronRight,
+            },
+            {
+                title: "Contact",
+                url: "/cms/contact",
+                icon: ChevronRight,
+            },
         ]
     },
     {
@@ -49,6 +64,26 @@ const items = [
             {
                 title: "Testimonials",
                 url: "/cms/testimonials",
+            },
+            {
+                title: "Visi Mission",
+                url: "/cms/missions",
+            },
+            {
+                title: "Why Us",
+                url: "/cms/whyus",
+            },
+            {
+                title: "Our Teams",
+                url: "/cms/ourteams",
+            },
+            {
+                title: "Gallery of Services",
+                url: "/cms/servicegallery",
+            },
+            {
+                title: "Contacts",
+                url: "/cms/contacts",
             },
         ]
     }

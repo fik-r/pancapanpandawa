@@ -17,7 +17,6 @@ export async function createOrUpdateCertificate(newData, id) {
 
         return true;
     } catch (e) {
-        console.log(e)
         return false
     }
 

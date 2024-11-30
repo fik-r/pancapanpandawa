@@ -1,12 +1,14 @@
 "use server"
 import { uploadImage } from "@/lib/actions/UtilsActions";
 import ServicesSchema from "@/models/Services";
+import { v4 as uuidv4 } from 'uuid';
 
 export async function createOrUpdateService(newData, id) {
     try {
         const urlImage = newData.image.name ? await uploadImage(newData.image) : newData.imageUrl
         const data = {
             ...newData,
+            _id: id || uuidv4(),
             image: urlImage,
         }
         if (id) {
@@ -17,7 +19,6 @@ export async function createOrUpdateService(newData, id) {
 
         return true;
     } catch (e) {
-        console.log(e)
         return false
     }
 
@@ -29,8 +30,5 @@ export async function deleteService(id) {
 
 export async function getServices() {
     const list = await ServicesSchema.find().sort({ createdAt: 1 }).select('_id -__v').lean();
-    return list.map((item) => ({
-        ...item,
-        _id: item._id.toString()
-    }));
+    return list
 }

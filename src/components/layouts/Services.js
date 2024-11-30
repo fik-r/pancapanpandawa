@@ -2,6 +2,7 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { ChevronRight } from "lucide-react"
 import { BASE_URL } from "@/lib/utils";
+import Link from "next/link";
 
 const Services = ({ data }) => {
     const Item = ({ data }) => {
@@ -17,10 +18,12 @@ const Services = ({ data }) => {
                 </div>
                 <span className="p-text-heading-sm lg:p-text-heading-lg text-dune mb-[0.25rem] lg:mb-[0.75rem] line-clamp-1">{data.title}</span>
                 <span className="p-text-body-sm lg:p-text-body-md leading-[1.25rem] lg:leading-[1.875rem] text-dune mb-[1rem] lg:mb-[1.5rem] text-carbon line-clamp-3 lg:line-clamp-4">{data.description}</span>
-                <Button className="w-[8.188rem] rounded-full p-text-body-sm font-semibold">
-                    See details
-                    <ChevronRight className="h-4 w-4" />
-                </Button>
+                <Link href={"/services?q=" + data.title}>
+                    <Button className="w-[8.188rem] rounded-full p-text-body-sm font-semibold">
+                        See details
+                        <ChevronRight className="h-4 w-4" />
+                    </Button>
+                </Link>
             </div>
         )
     }

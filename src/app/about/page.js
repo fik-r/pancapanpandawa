@@ -7,17 +7,50 @@ import CoreValues from "@/components/layouts/CoreValues";
 import VisiMisi from "@/components/layouts/VisiMisi";
 import { SingleGallery } from "@/components/layouts/Gallery";
 import OurTeam from "@/components/layouts/OurTeam";
+import { getAboutpage } from "@/lib/actions/AboutpageActions";
+import { getMissions } from "@/lib/actions/MissionActions";
+import { getCoreValues } from "@/lib/actions/CoreValuesActions";
+import { BASE_URL } from "@/lib/utils";
+import { getOurTeam } from "@/lib/actions/OurTeamActions";
+export const dynamic = 'force-dynamic'
 
-export default function About() {
+export default async function About() {
+    const [
+        aboutpageData,
+        missionsData,
+        coreValuesData,
+        ourTeamData
+    ] = await Promise.all([
+        getAboutpage(),
+        getMissions(),
+        getCoreValues(),
+        getOurTeam()
+    ]);
+    const data = {
+        ...aboutpageData,
+        visiMission: {
+            ...aboutpageData?.visiMission,
+            items: missionsData
+        },
+        coreValues: {
+            ...aboutpageData?.coreValues,
+            items: coreValuesData
+        },
+        ourTeam: {
+            ...aboutpageData?.ourTeam,
+            items: ourTeamData
+        },
+    }
+
     return (
         <div className="flex flex-col relative">
             <Navbar />
-            <Hero2 title={"About Us"}/>
-            <AboutCompany />
-            <CoreValues />
-            <VisiMisi />
-            <SingleGallery alt="gallery" />
-            <OurTeam />
+            <Hero2 data={data?.hero} />
+            <AboutCompany data={data?.aboutCompany} />
+            <CoreValues data={data?.coreValues} />
+            <VisiMisi data={data?.visiMission} />
+            <SingleGallery alt="gallery" url={BASE_URL + data?.gallery?.image} />
+            <OurTeam data={data?.ourTeam} />
             <Footer />
         </div>
     );
