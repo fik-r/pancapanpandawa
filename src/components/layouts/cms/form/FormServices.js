@@ -230,7 +230,7 @@ export function FormDatatableServices({ title = "Services", initialData = {}, ac
                             value={detail.html}
                             onModelChange={(html) => handleDetailChange(index, "html", html)}
                         />
-                        {errors[`details-${index}`] && <Label className="text-sm text-red-500 px-[0.25rem]">Detail title and content can't be empty!</Label>}
+                        {errors[`details-${index}`] && <Label className="text-sm text-red-500 px-[0.25rem]">{"Detail title and content can't be empty!"}</Label>}
                         <Button
                             type="button"
                             className="bg-red-500 hover:bg-red-600 mt-2"
