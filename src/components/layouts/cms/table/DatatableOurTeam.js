@@ -5,13 +5,18 @@ import { FormDatatableOurTeams } from "@/components/layouts/cms/form/FormOurTeam
 import { createOrUpdateOurTeam, deleteOurTeam } from "@/lib/actions/OurTeamActions"
 import { useRouter } from 'next/navigation';
 import { BASE_URL } from "@/lib/utils"
+import LoadingOverlay from "@/components/layouts/Loading"
+import { useToast } from "@/hooks/use-toast"
+
 export default function DatatableOurTeam({ data }) {
     const [loading, setLoading] = useState(false)
     const [formData, setFormData] = useState({});
     const [dialogOpen, setDialogOpen] = useState(false);
     const router = useRouter()
+    const { toast } = useToast()
     return (
         <div className="flex flex-col">
+            <LoadingOverlay loading={loading} />
             <AppDatatable
                 title={"Our Team"}
                 dialogOpen={dialogOpen}
@@ -40,10 +45,16 @@ export default function DatatableOurTeam({ data }) {
                 form={
                     <FormDatatableOurTeams initialData={formData} action={async (data, id) => {
                         setLoading(true)
-                        await createOrUpdateOurTeam(data, id)
+                        const result = await createOrUpdateOurTeam(data, id)
                         setLoading(false)
                         setDialogOpen(false)
-                        router.refresh()
+                        toast({
+                            variant: result ? "primary" : "destructive",
+                            description: result ? "Success" : "Error",
+                        })
+                        if (result) {
+                            router.refresh()
+                        }
                     }} />
                 }
             />

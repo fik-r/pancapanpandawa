@@ -2,16 +2,26 @@
 import ContactSchema from "@/models/Contact";
 
 export async function createOrUpdateContact(newData, id) {
-    if (id) {
-        await ContactSchema.findByIdAndUpdate(id, newData, { new: true });
-    } else {
-        await ContactSchema.create(newData);
+    try {
+        if (id) {
+            await ContactSchema.findByIdAndUpdate(id, newData, { new: true });
+        } else {
+            await ContactSchema.create(newData);
+        }
+        return true
+    } catch (e) {
+        return false
     }
 
 }
 
 export async function deleteContact(id) {
-    await ContactSchema.deleteOne({ _id: id })
+    try {
+        await ContactSchema.deleteOne({ _id: id })
+        return true
+    } catch (e) {
+        return false
+    }
 }
 
 export async function getContacts() {

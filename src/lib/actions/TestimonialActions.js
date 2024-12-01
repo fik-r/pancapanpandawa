@@ -3,16 +3,26 @@ import { uploadImage } from "@/lib/actions/UtilsActions";
 import TestimonialSchema from "@/models/Testimonial";
 
 export async function createOrUpdateTestimonial(newData, id) {
-    if (id) {
-        await TestimonialSchema.findByIdAndUpdate(id, newData, { new: true });
-    } else {
-        await TestimonialSchema.create(newData);
+    try {
+        if (id) {
+            await TestimonialSchema.findByIdAndUpdate(id, newData, { new: true });
+        } else {
+            await TestimonialSchema.create(newData);
+        }
+        return true
+    } catch (e) {
+        return false
     }
 
 }
 
 export async function deleteTestimonial(id) {
-    await TestimonialSchema.deleteOne({ _id: id })
+    try {
+        await TestimonialSchema.deleteOne({ _id: id })
+        return true
+    } catch (e) {
+        return false
+    }
 }
 
 export async function getTestimonials() {

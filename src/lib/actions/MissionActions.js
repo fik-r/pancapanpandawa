@@ -2,16 +2,26 @@
 import MissionSchema from "@/models/Mission";
 
 export async function createOrUpdateMission(newData, id) {
-    if (id) {
-        await MissionSchema.findByIdAndUpdate(id, newData, { new: true });
-    } else {
-        await MissionSchema.create(newData);
+    try {
+        if (id) {
+            await MissionSchema.findByIdAndUpdate(id, newData, { new: true });
+        } else {
+            await MissionSchema.create(newData);
+        }
+        return true
+    } catch (e) {
+        return false
     }
 
 }
 
 export async function deleteMission(id) {
-    await MissionSchema.deleteOne({ _id: id })
+    try {
+        await MissionSchema.deleteOne({ _id: id })
+        return true
+    } catch (e) {
+        return false
+    }
 }
 
 export async function getMissions() {

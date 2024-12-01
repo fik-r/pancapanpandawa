@@ -2,16 +2,26 @@
 import ReasonSchema from "@/models/Reason";
 
 export async function createOrUpdateReason(newData, id) {
-    if (id) {
-        await ReasonSchema.findByIdAndUpdate(id, newData, { new: true });
-    } else {
-        await ReasonSchema.create(newData);
+    try {
+        if (id) {
+            await ReasonSchema.findByIdAndUpdate(id, newData, { new: true });
+        } else {
+            await ReasonSchema.create(newData);
+        }
+        return true
+    } catch (e) {
+        return false
     }
 
 }
 
 export async function deleteReason(id) {
-    await ReasonSchema.deleteOne({ _id: id })
+    try {
+        await ReasonSchema.deleteOne({ _id: id })
+        return true
+    } catch (e) {
+        return false
+    }
 }
 
 export async function getReasons() {

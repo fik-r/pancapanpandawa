@@ -29,7 +29,6 @@ import {
 } from "@/components/ui/table"
 import AppDialog from "@/components/layouts/cms/AppDialog"
 import { AppDeleteDialog } from "./AppDeleteDialog"
-
 export default function DatatablePartner({
     title,
     dialogOpen,

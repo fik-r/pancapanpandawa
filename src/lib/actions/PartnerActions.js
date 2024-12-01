@@ -23,7 +23,12 @@ export async function createOrUpdatePartner(newData, id) {
 }
 
 export async function deletePartner(id) {
-    await PartnersSchema.deleteOne({ _id: id })
+    try {
+        await PartnersSchema.deleteOne({ _id: id })
+        return true
+    } catch (e) {
+        return false
+    }
 }
 
 export async function getPartners() {

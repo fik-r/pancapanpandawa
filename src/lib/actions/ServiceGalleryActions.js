@@ -23,7 +23,12 @@ export async function createOrUpdateGallery(newData, id) {
 }
 
 export async function deleteGallery(id) {
-    await ServiceGallerySchema.deleteOne({ _id: id })
+    try {
+        await ServiceGallerySchema.deleteOne({ _id: id })
+        return true
+    } catch (e) {
+        return false
+    }
 }
 
 export async function getGallery() {

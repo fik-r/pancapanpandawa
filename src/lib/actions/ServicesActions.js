@@ -25,7 +25,12 @@ export async function createOrUpdateService(newData, id) {
 }
 
 export async function deleteService(id) {
-    await ServicesSchema.deleteOne({ _id: id })
+    try {
+        await ServicesSchema.deleteOne({ _id: id })
+        return true
+    } catch (e) {
+        return false
+    }
 }
 
 export async function getServices() {

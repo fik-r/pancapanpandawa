@@ -23,7 +23,13 @@ export async function createOrUpdateCertificate(newData, id) {
 }
 
 export async function deleteCertificate(id) {
-    await CertificateSchema.deleteOne({ _id: id })
+    try {
+        await CertificateSchema.deleteOne({ _id: id })
+        return true
+    } catch (e) {
+        return false
+    }
+
 }
 
 export async function getCertificates() {

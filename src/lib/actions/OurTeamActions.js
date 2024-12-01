@@ -23,7 +23,12 @@ export async function createOrUpdateOurTeam(newData, id) {
 }
 
 export async function deleteOurTeam(id) {
-    await OurTeamSchema.deleteOne({ _id: id })
+    try {
+        await OurTeamSchema.deleteOne({ _id: id })
+        return true
+    } catch (e) {
+        return false
+    }
 }
 
 export async function getOurTeam() {

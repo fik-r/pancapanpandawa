@@ -17,7 +17,6 @@ const AppSection = ({ title, children }) => {
             <CardContent>
                 {children}
             </CardContent>
-
         </Card>
     )
 }

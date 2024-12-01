@@ -20,7 +20,7 @@ export default function ClientHomepage({ data }) {
     const [loading, setLoading] = useState(false)
 
     return (
-        <Layout>
+        <Layout loading={loading}>
             <div className="lg:px-[2.5rem] p-[1rem] w-full flex flex-col gap-y-[1rem]">
                 <FormHero
                     initialData={data?.hero}

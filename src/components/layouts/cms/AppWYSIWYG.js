@@ -1,48 +1,71 @@
-import { useState } from 'react';
-
-
-// Require Editor CSS files.
-import 'froala-editor/css/froala_style.min.css';
-import 'froala-editor/css/froala_editor.pkgd.min.css';
-
-import FroalaEditorComponent from 'react-froala-wysiwyg';
-
-// Import all Froala Editor plugins;
-import 'froala-editor/js/plugins.pkgd.min.js';
-
-// Import a single Froala Editor plugin.
-// import 'froala-editor/js/plugins/align.min.js';
-
-// Import a language file.
-// import 'froala-editor/js/languages/de.js';
-
-// Import a third-party plugin.
-// import 'froala-editor/js/third_party/image_tui.min.js';
-// import 'froala-editor/js/third_party/embedly.min.js';
-// import 'froala-editor/js/third_party/spell_checker.min.js';
-
-// Include font-awesome css if required.
-// install using "npm install font-awesome --save"
-// import 'font-awesome/css/font-awesome.css';
-// import 'froala-editor/js/third_party/font_awesome.min.js';
-
-// Include special components if required.
-// import FroalaEditorView from 'react-froala-wysiwyg/FroalaEditorView';
-// import FroalaEditorA from 'react-froala-wysiwyg/FroalaEditorA';
-// import FroalaEditorButton from 'react-froala-wysiwyg/FroalaEditorButton';
-// import FroalaEditorImg from 'react-froala-wysiwyg/FroalaEditorImg';
-// import FroalaEditorInput from 'react-froala-wysiwyg/FroalaEditorInput';
-
+import ReactQuill from 'react-quill-new';
+import 'quill/dist/quill.snow.css';
 
 export default function AppWYSIWYG({ value, onModelChange }) {
-    const config = {
-        placeholderText: 'Edit Your Content Here!',
-        imageInsertButtons: ['imageBack', '|', 'imageByURL', 'imageUpload'],
-        imageUploadURL: '/api/uploads', // Set to the API endpoint for uploads
-        imageAllowedTypes: ['jpeg', 'jpg', 'png', 'gif', 'webp'], // Allowed types
+    const modules = {
+        toolbar: {
+            container: [
+                [{ header: [1, 2, false] }],
+                ['bold', 'italic', 'underline', 'strike'],
+                [{ list: 'ordered' }, { list: 'bullet' }],
+                ['link', 'image'],
+            ],
+            handlers: {
+                image: imageHandler,
+            },
+        },
     };
 
+    function imageHandler() {
+        const input = document.createElement('input');
+        input.setAttribute('type', 'file');
+        input.setAttribute('accept', 'image/*');
+        input.click();
+
+        input.onchange = async () => {
+            const file = input.files[0];
+            if (file) {
+                const formData = new FormData();
+                formData.append('file', file);
+
+                // Replace this URL with your image upload API endpoint
+                const response = await fetch('/api/uploads', {
+                    method: 'POST',
+                    body: formData,
+                });
+                const data = await response.json();
+
+                const quill = this.quill;
+                const range = quill.getSelection();
+                quill.insertEmbed(range.index, 'image', data.url);
+            }
+        };
+    }
+
     return (
-        <FroalaEditorComponent tag='textarea' config={config} model={value} onModelChange={onModelChange} />
-    )
+        <ReactQuill
+            value={value} // Controlled editor value
+            onChange={onModelChange} // Update parent state
+            placeholder="Edit Your Content Here!" // Placeholder text
+            modules={{
+                toolbar: [
+                    [{ header: [1, 2, false] }],
+                    ['bold', 'italic', 'underline', 'strike'],
+                    [{ list: 'ordered' }],
+                    ['link', 'image'],
+                ],
+
+            }} // Toolbar configuration
+            formats={[
+                'header',
+                'bold',
+                'italic',
+                'underline',
+                'strike',
+                'list',
+                'link',
+                'image',
+            ]} // Supported formats
+        />
+    );
 }
