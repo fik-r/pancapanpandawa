@@ -131,6 +131,7 @@ export default function DatatablePartner({
                 <span className="font-bold p-text-heading-lg text-dune">{title}</span>
                 <Button className="bg-green-600 rounded-md p-text-body-sm font-semibold"
                     onClick={() => {
+                        setFormData({})
                         setDialogOpen(!dialogOpen)
                     }}
                 >

@@ -17,8 +17,6 @@ export async function createSession(username) {
         sameSite: 'lax',
         path: '/',
     })
-
-    redirect("/cms")
 }
 
 export async function login(data) {
