@@ -46,7 +46,7 @@ export function FormServiceGallery({ title = "Gallery of Services", initialData 
             <form className="grid w-full items-center gap-4" onSubmit={handleSubmit}>
                 <AppInputGroup
                     id="heading"
-                    placeholder={"Input your heading text here.."}
+                    placeholder={"Input heading text here.."}
                     value={formData.heading}
                     isError={errors?.heading}
                     label={"Heading"}
@@ -69,7 +69,7 @@ export function FormServiceGallery({ title = "Gallery of Services", initialData 
 export function FormDatatableServiceGallery({ title = "Gallery of Services", initialData = {}, action }) {
     const [errors, setErrors] = useState({});
     const [formData, setFormData] = useState({
-        imageUrl: BASE_URL + initialData?.image || "",
+        imageUrl: initialData?.image ? BASE_URL + initialData?.image : "",
         imageFile: {}
     })
     const [preview, setPreview] = useState(initialData?.image ? (BASE_URL + initialData?.image) : null);
@@ -119,7 +119,7 @@ export function FormDatatableServiceGallery({ title = "Gallery of Services", ini
             <form className="grid w-full items-center gap-4" onSubmit={handleSubmit}>
                 <AppInputGroup
                     id="image"
-                    placeholder={"Input your image text here.."}
+                    placeholder={"Input image text here.."}
                     isError={errors?.imageFile}
                     label={"Image"}
                     type={"image"}

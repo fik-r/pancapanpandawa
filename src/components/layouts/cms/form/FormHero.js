@@ -24,7 +24,7 @@ export default function FormHero({ initialData, showHighlight, action }) {
     const [errors, setErrors] = useState({});
     const [formData, setFormData] = useState({
         heading: initialData?.heading || "",
-        imageUrl: BASE_URL + initialData?.image || "",
+        imageUrl: initialData?.image ? BASE_URL + initialData?.image : "",
         imageFile: {},
         ...highlightFormData()
     })
@@ -104,7 +104,7 @@ export default function FormHero({ initialData, showHighlight, action }) {
             <form className="grid w-full items-center gap-4" onSubmit={handleSubmit}>
                 <AppInputGroup
                     id="heading"
-                    placeholder={"Input your heading text here.."}
+                    placeholder={"Input heading text here.."}
                     value={formData.heading}
                     isError={errors?.heading}
                     label={"Heading"}
@@ -165,7 +165,7 @@ export default function FormHero({ initialData, showHighlight, action }) {
 
                 <AppInputGroup
                     id="image"
-                    placeholder={"Input your image text here.."}
+                    placeholder={"Input image text here.."}
                     isError={errors?.imageFile}
                     label={"Image"}
                     type={"image"}

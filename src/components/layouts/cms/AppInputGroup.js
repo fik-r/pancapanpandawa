@@ -10,7 +10,8 @@ export default function AppInputGroup({
     onChange,
     type,
     preview,
-    children
+    children,
+    disabled
 }) {
     return (
         <div className="flex flex-col space-y-1.5">
@@ -23,6 +24,7 @@ export default function AppInputGroup({
                 type={type}
                 preview={preview}
                 onChange={onChange}
+                disabled={disabled}
             />
             {children}
         </div>

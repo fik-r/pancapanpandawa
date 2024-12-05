@@ -44,7 +44,7 @@ export default function FormLogin({ title = "Login", action }) {
             <form className="grid w-full items-center gap-4" onSubmit={handleSubmit}>
                 <AppInputGroup
                     id="username"
-                    placeholder={"Input your username here.."}
+                    placeholder={"Input username here.."}
                     value={formData.username}
                     isError={errors?.username}
                     label={"Username"}
@@ -52,7 +52,7 @@ export default function FormLogin({ title = "Login", action }) {
                 />
                 <AppInputGroup
                     id="password"
-                    placeholder={"Input your password here.."}
+                    placeholder={"Input password here.."}
                     value={formData.password}
                     isError={errors?.password}
                     label={"Password"}

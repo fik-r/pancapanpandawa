@@ -38,7 +38,8 @@ export default function DatatablePartner({
     form,
     setFormData,
     deleteAction,
-    setLoading
+    setLoading,
+    viewOnly
 }) {
     const [selectedId, setSelectedId] = useState("")
     const [dialogDeleteOpen, setDialogDeleteOpen] = useState(false)
@@ -90,7 +91,7 @@ export default function DatatablePartner({
                                 <DropdownMenuItem onClick={() => {
                                     setFormData(row.original)
                                     setDialogOpen(!dialogOpen)
-                                }}>Update</DropdownMenuItem>
+                                }}>{viewOnly ? "View" : "Update"}</DropdownMenuItem>
                                 <DropdownMenuItem className="text-red-500 font-bold"
                                     onClick={() => {
                                         setSelectedId(row.original._id)

@@ -11,7 +11,7 @@ export function FormWhyUs({ title = "Why Us", initialData, action }) {
     const [errors, setErrors] = useState({});
     const [formData, setFormData] = useState({
         heading: initialData?.heading || "",
-        imageUrl: BASE_URL + initialData?.image || "",
+        imageUrl: initialData?.image ? BASE_URL + initialData?.image : "",
         imageFile: {},
     });
 
@@ -78,7 +78,7 @@ export function FormWhyUs({ title = "Why Us", initialData, action }) {
             <form className="grid w-full items-center gap-4" onSubmit={handleSubmit}>
                 <AppInputGroup
                     id="heading"
-                    placeholder="Input your heading text here..."
+                    placeholder="Input heading text here..."
                     value={formData.heading}
                     isError={errors.heading}
                     label="Heading"
@@ -147,7 +147,7 @@ export function FormDatatableWhyUs({ title = "Why Us", initialData = {}, action 
             <form className="grid w-full items-center gap-4" onSubmit={handleSubmit}>
                 <AppInputGroup
                     id="text"
-                    placeholder={"Input your text text here.."}
+                    placeholder={"Input text text here.."}
                     value={formData.text}
                     isError={errors?.text}
                     label={"Text"}

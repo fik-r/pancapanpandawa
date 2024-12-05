@@ -12,6 +12,7 @@ import { getMissions } from "@/lib/actions/MissionActions";
 import { getCoreValues } from "@/lib/actions/CoreValuesActions";
 import { BASE_URL } from "@/lib/utils";
 import { getOurTeam } from "@/lib/actions/OurTeamActions";
+import { getSocialMedia } from "@/lib/actions/SocialMediaActions";
 export const dynamic = 'force-dynamic'
 
 export default async function About() {
@@ -19,12 +20,14 @@ export default async function About() {
         aboutpageData,
         missionsData,
         coreValuesData,
-        ourTeamData
+        ourTeamData,
+        socialMediaData,
     ] = await Promise.all([
         getAboutpage(),
         getMissions(),
         getCoreValues(),
-        getOurTeam()
+        getOurTeam(),
+        getSocialMedia()
     ]);
     const data = {
         ...aboutpageData,
@@ -51,7 +54,7 @@ export default async function About() {
             <VisiMisi data={data?.visiMission} />
             <SingleGallery alt="gallery" url={BASE_URL + data?.gallery?.image} />
             <OurTeam data={data?.ourTeam} />
-            <Footer />
+            <Footer data={socialMediaData} />
         </div>
     );
 }

@@ -10,6 +10,7 @@ const CoreValues = ({ data }) => {
                     width={40}
                     height={40}
                     alt="ic_core_value"
+                    className="max-h-[40px]"
                 />
                 <div className="flex flex-col gap-y-[0.5rem]">
                     <span className="text-white p-text-body-md lg:p-text-body-lg font-semibold">{item?.title}</span>

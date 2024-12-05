@@ -176,6 +176,24 @@
   line-height: 1.563rem;
 }
 
+.content-html ol {
+  list-style-type: decimal;
+  /* Ensures numbers are shown */
+  margin: 0;
+  /* Optional: adjust for consistent layout */
+  padding-left: 20px;
+  /* Adds spacing for nested lists */
+}
+
+.content-html li {
+  margin-bottom: 10px;
+  /* Optional: space between list items */
+  color: #333;
+  /* Customize color if needed */
+  font-size: 16px;
+  /* Adjust font size */
+}
+
 .loading-overlay {
   position: fixed;
   top: 0;

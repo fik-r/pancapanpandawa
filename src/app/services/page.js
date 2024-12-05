@@ -7,17 +7,21 @@ import { ServiceGallery } from "@/components/layouts/Gallery";
 import { getServicepage } from "@/lib/actions/ServicepageActions";
 import { getGallery } from "@/lib/actions/ServiceGalleryActions";
 import { getServices } from "@/lib/actions/ServicesActions";
+import { getSocialMedia } from "@/lib/actions/SocialMediaActions";
+
 export const dynamic = 'force-dynamic'
 
 export default async function Services() {
     const [
         servicepageData,
         galleryOfServiceData,
-        servicesData
+        servicesData,
+        socialMediaData,
     ] = await Promise.all([
         getServicepage(),
         getGallery(),
-        getServices()
+        getServices(),
+        getSocialMedia()
     ]);
     const data = {
         ...servicepageData,
@@ -37,7 +41,7 @@ export default async function Services() {
             <Hero2 data={data?.hero} />
             <OurServices data={data?.services} />
             <ServiceGallery data={data?.gallery} />
-            <Footer />
+            <Footer data={socialMediaData} />
         </div>
     );
 }

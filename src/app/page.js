@@ -16,6 +16,7 @@ import { getCertificates } from "@/lib/actions/CertificateActions";
 import { getTestimonials } from "@/lib/actions/TestimonialActions";
 import { getReasons } from "@/lib/actions/ReasonActions";
 import { getGallery } from "@/lib/actions/ServiceGalleryActions";
+import { getSocialMedia } from "@/lib/actions/SocialMediaActions";
 export const dynamic = 'force-dynamic'
 
 export default async function Home() {
@@ -26,7 +27,8 @@ export default async function Home() {
     certificateData,
     testimonialsData,
     reasonsData,
-    galleryData
+    galleryData,
+    socialMediaData,
   ] = await Promise.all([
     getHomepage(),
     getPartners(),
@@ -34,7 +36,8 @@ export default async function Home() {
     getCertificates(),
     getTestimonials(),
     getReasons(),
-    getGallery()
+    getGallery(),
+    getSocialMedia()
   ]);
   const data = {
     ...homepageData,
@@ -75,7 +78,7 @@ export default async function Home() {
         <span className="lg:w-[50%] font-bold p-text-heading-sm lg:p-text-display-lg text-dune mb-[1.5rem] lg:mb-[3rem]">Get in touch with us</span>
         <ContactForm />
       </div>
-      <Footer />
+      <Footer data={socialMediaData} />
     </div>
   );
 }

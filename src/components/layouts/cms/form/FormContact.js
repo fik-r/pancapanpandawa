@@ -47,7 +47,7 @@ export function FormContact({ title = "Contact", initialData = {}, action }) {
             <form className="grid w-full items-center gap-4" onSubmit={handleSubmit}>
                 <AppInputGroup
                     id="title"
-                    placeholder={"Input your title text here.."}
+                    placeholder={"Input title text here.."}
                     value={formData.title}
                     isError={errors?.title}
                     label={"Title"}
@@ -55,7 +55,7 @@ export function FormContact({ title = "Contact", initialData = {}, action }) {
                 />
                 <AppInputGroup
                     id="description"
-                    placeholder={"Input your description text here.."}
+                    placeholder={"Input description text here.."}
                     value={formData.description}
                     isError={errors?.description}
                     label={"Description"}
@@ -122,7 +122,7 @@ export function FormDatatableContacts({ title = "Contacts", initialData = {}, ac
             <form className="grid w-full items-center gap-4" onSubmit={handleSubmit}>
                 <AppInputGroup
                     id="title"
-                    placeholder={"Input your title text here.."}
+                    placeholder={"Input title text here.."}
                     value={formData.title}
                     isError={errors?.title}
                     label={"Title"}
@@ -130,7 +130,7 @@ export function FormDatatableContacts({ title = "Contacts", initialData = {}, ac
                 />
                 <AppInputGroup
                     id="description"
-                    placeholder={"Input your description text here.."}
+                    placeholder={"Input description text here.."}
                     value={formData.description}
                     isError={errors?.description}
                     label={"Description"}

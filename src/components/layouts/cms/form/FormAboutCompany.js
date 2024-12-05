@@ -9,7 +9,7 @@ export default function FormAboutCompany({ initialData, action }) {
     const [formData, setFormData] = useState({
         heading: initialData?.heading || "",
         description: initialData?.description || "",
-        imageUrl: BASE_URL + initialData?.image || "",
+        imageUrl: initialData?.image ? BASE_URL + initialData?.image : "",
         imageFile: {},
     })
     const [preview, setPreview] = useState(initialData?.image ? (BASE_URL + initialData?.image) : null);
@@ -71,7 +71,7 @@ export default function FormAboutCompany({ initialData, action }) {
             <form className="grid w-full items-center gap-4" onSubmit={handleSubmit}>
                 <AppInputGroup
                     id="heading"
-                    placeholder={"Input your heading text here.."}
+                    placeholder={"Input heading text here.."}
                     value={formData.heading}
                     isError={errors?.heading}
                     label={"Heading"}
@@ -80,7 +80,7 @@ export default function FormAboutCompany({ initialData, action }) {
 
                 <AppInputGroup
                     id="description"
-                    placeholder={"Input your description text here.."}
+                    placeholder={"Input description text here.."}
                     value={formData.description}
                     isError={errors?.description}
                     label={"Description"}
@@ -90,7 +90,7 @@ export default function FormAboutCompany({ initialData, action }) {
 
                 <AppInputGroup
                     id="image"
-                    placeholder={"Input your image text here.."}
+                    placeholder={"Input image text here.."}
                     isError={errors?.imageFile}
                     label={"Image"}
                     type={"image"}

@@ -47,7 +47,7 @@ export function FormOurTeam({ title = "Our Team", initialData = {}, action }) {
             <form className="grid w-full items-center gap-4" onSubmit={handleSubmit}>
                 <AppInputGroup
                     id="title"
-                    placeholder={"Input your title text here.."}
+                    placeholder={"Input title text here.."}
                     value={formData.title}
                     isError={errors?.title}
                     label={"Title"}
@@ -55,7 +55,7 @@ export function FormOurTeam({ title = "Our Team", initialData = {}, action }) {
                 />
                 <AppInputGroup
                     id="description"
-                    placeholder={"Input your description text here.."}
+                    placeholder={"Input description text here.."}
                     value={formData.description}
                     isError={errors?.description}
                     label={"Description"}
@@ -80,7 +80,7 @@ export function FormDatatableOurTeams({ title = "Our Team", initialData = {}, ac
     const [formData, setFormData] = useState({
         name: initialData?.name || "",
         position: initialData?.position || "",
-        imageUrl: BASE_URL + initialData?.image || "",
+        imageUrl: initialData?.image ? BASE_URL + initialData?.image : "",
         imageFile: {}
     })
     const [preview, setPreview] = useState(initialData?.image ? (BASE_URL + initialData?.image) : null);
@@ -142,7 +142,7 @@ export function FormDatatableOurTeams({ title = "Our Team", initialData = {}, ac
             <form className="grid w-full items-center gap-4" onSubmit={handleSubmit}>
                 <AppInputGroup
                     id="name"
-                    placeholder={"Input your name text here.."}
+                    placeholder={"Input name text here.."}
                     value={formData.name}
                     isError={errors?.name}
                     label={"Name"}
@@ -150,7 +150,7 @@ export function FormDatatableOurTeams({ title = "Our Team", initialData = {}, ac
                 />
                 <AppInputGroup
                     id="position"
-                    placeholder={"Input your position text here.."}
+                    placeholder={"Input position text here.."}
                     value={formData.position}
                     isError={errors?.position}
                     label={"Position"}
@@ -160,7 +160,7 @@ export function FormDatatableOurTeams({ title = "Our Team", initialData = {}, ac
 
                 <AppInputGroup
                     id="image"
-                    placeholder={"Input your image text here.."}
+                    placeholder={"Input image text here.."}
                     isError={errors?.imageFile}
                     label={"Image"}
                     type={"image"}

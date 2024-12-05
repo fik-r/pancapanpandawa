@@ -51,7 +51,7 @@ export function FormServices({ title = "Services", initialData = {}, action }) {
             <form className="grid w-full items-center gap-4" onSubmit={handleSubmit}>
                 <AppInputGroup
                     id="title"
-                    placeholder={"Input your title text here.."}
+                    placeholder={"Input title text here.."}
                     value={formData.title}
                     isError={errors?.title}
                     label={"Title"}
@@ -59,7 +59,7 @@ export function FormServices({ title = "Services", initialData = {}, action }) {
                 />
                 <AppInputGroup
                     id="description"
-                    placeholder={"Input your description text here.."}
+                    placeholder={"Input description text here.."}
                     value={formData.description}
                     isError={errors?.description}
                     label={"Description"}
@@ -86,7 +86,7 @@ export function FormDatatableServices({ title = "Services", initialData = {}, ac
         title: initialData?.title || "",
         description: initialData?.description || "",
         details: initialData?.details || [],
-        imageUrl: BASE_URL + initialData?.image || "",
+        imageUrl: initialData?.image ? BASE_URL + initialData?.image : "",
         imageFile: {}
     })
 
@@ -118,8 +118,6 @@ export function FormDatatableServices({ title = "Services", initialData = {}, ac
                 isValid = false;
             }
         });
-
-        console.log(formData.details)
 
         setErrors(newErrors);
         if (!isValid) return
@@ -173,7 +171,6 @@ export function FormDatatableServices({ title = "Services", initialData = {}, ac
         const updatedDetails = [...formData.details];
         updatedDetails[index][field] = value;
 
-        console.log(updatedDetails)
         setFormData({ ...formData, details: updatedDetails });
 
         if (value.trim() !== "") {
@@ -193,7 +190,7 @@ export function FormDatatableServices({ title = "Services", initialData = {}, ac
             <form className="grid w-full items-center gap-4" onSubmit={handleSubmit}>
                 <AppInputGroup
                     id="title"
-                    placeholder={"Input your title text here.."}
+                    placeholder={"Input title text here.."}
                     value={formData.title}
                     isError={errors?.title}
                     label={"Title"}
@@ -201,7 +198,7 @@ export function FormDatatableServices({ title = "Services", initialData = {}, ac
                 />
                 <AppInputGroup
                     id="description"
-                    placeholder={"Input your description text here.."}
+                    placeholder={"Input description text here.."}
                     value={formData.description}
                     isError={errors?.description}
                     label={"Description"}
@@ -211,7 +208,7 @@ export function FormDatatableServices({ title = "Services", initialData = {}, ac
 
                 <AppInputGroup
                     id="image"
-                    placeholder={"Input your image text here.."}
+                    placeholder={"Input image text here.."}
                     isError={errors?.imageFile}
                     label={"Image"}
                     type={"image"}

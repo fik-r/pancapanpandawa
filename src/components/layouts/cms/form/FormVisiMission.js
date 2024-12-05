@@ -46,7 +46,7 @@ export function FormVisiMission({ title = "Visi & Mission", initialData = {}, ac
             <form className="grid w-full items-center gap-4" onSubmit={handleSubmit}>
                 <AppInputGroup
                     id="title"
-                    placeholder={"Input your title text here.."}
+                    placeholder={"Input title text here.."}
                     value={formData.title}
                     isError={errors?.title}
                     label={"Title"}
@@ -54,7 +54,7 @@ export function FormVisiMission({ title = "Visi & Mission", initialData = {}, ac
                 />
                 <AppInputGroup
                     id="visi"
-                    placeholder={"Input your visi text here.."}
+                    placeholder={"Input visi text here.."}
                     value={formData.visi}
                     isError={errors?.visi}
                     label={"Visi"}
@@ -114,7 +114,7 @@ export function FormDatatableVisiMission({ title = "Mission", initialData = {}, 
             <form className="grid w-full items-center gap-4" onSubmit={handleSubmit}>
                 <AppInputGroup
                     id="text"
-                    placeholder={"Input your text text here.."}
+                    placeholder={"Input text text here.."}
                     value={formData.text}
                     isError={errors?.text}
                     label={"Text"}

@@ -15,11 +15,12 @@ import { FormCoreValues } from "@/components/layouts/cms/form/FormCoreValues"
 import { FormVisiMission } from "@/components/layouts/cms/form/FormVisiMission"
 import FormAboutGallery from "@/components/layouts/cms/form/FormAboutGallery"
 import { FormOurTeam } from "@/components/layouts/cms/form/FormOurTeam"
+import { useToast } from "@/hooks/use-toast"
 
 
 export default function ClientAboutpage({ data }) {
     const [loading, setLoading] = useState(false)
-
+    const { toast } = useToast()
     return (
         <Layout loading={loading}>
             <div className="lg:px-[2.5rem] p-[1rem] w-full flex flex-col gap-y-[1rem]">
@@ -27,47 +28,71 @@ export default function ClientAboutpage({ data }) {
                     initialData={data?.hero}
                     action={async (data) => {
                         setLoading(true)
-                        await updateHeroAboutpage(data)
+                        const result = await updateHeroAboutpage(data)
                         setLoading(false)
+                        toast({
+                            variant: result ? "primary" : "destructive",
+                            description: result ? "Success" : "Error",
+                        })
                     }} />
                 <FormAboutCompany
                     initialData={data?.aboutCompany}
                     action={async (data) => {
                         setLoading(true)
-                        await updateAboutCompanyAboutpage(data)
+                        const result = await updateAboutCompanyAboutpage(data)
                         setLoading(false)
+                        toast({
+                            variant: result ? "primary" : "destructive",
+                            description: result ? "Success" : "Error",
+                        })
                     }}
                 />
                 <FormCoreValues
                     initialData={data?.coreValues}
                     action={async (data) => {
                         setLoading(true)
-                        await updateCoreValuesAboutpage(data)
+                        const result = await updateCoreValuesAboutpage(data)
                         setLoading(false)
+                        toast({
+                            variant: result ? "primary" : "destructive",
+                            description: result ? "Success" : "Error",
+                        })
                     }}
                 />
                 <FormVisiMission
                     initialData={data?.visiMission}
                     action={async (data) => {
                         setLoading(true)
-                        await updateVisiMissionAboutpage(data)
+                        const result = await updateVisiMissionAboutpage(data)
                         setLoading(false)
+                        toast({
+                            variant: result ? "primary" : "destructive",
+                            description: result ? "Success" : "Error",
+                        })
                     }}
                 />
                 <FormAboutGallery
                     initialData={data?.gallery}
                     action={async (data) => {
                         setLoading(true)
-                        await updateAboutGalleryAboutpage(data)
+                        const result = await updateAboutGalleryAboutpage(data)
                         setLoading(false)
+                        toast({
+                            variant: result ? "primary" : "destructive",
+                            description: result ? "Success" : "Error",
+                        })
                     }}
                 />
                 <FormOurTeam
                     initialData={data?.ourTeam}
                     action={async (data) => {
                         setLoading(true)
-                        await updateOurTeamAboutpage(data)
+                        const result = await updateOurTeamAboutpage(data)
                         setLoading(false)
+                        toast({
+                            variant: result ? "primary" : "destructive",
+                            description: result ? "Success" : "Error",
+                        })
                     }}
                 />
             </div>

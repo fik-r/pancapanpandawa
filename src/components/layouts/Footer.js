@@ -1,6 +1,8 @@
+"use client"
+import { BASE_URL } from "@/lib/utils";
 import Image from "next/image";
 
-const Footer = () => {
+const Footer = ({ data }) => {
     const Link = ({ text }) => {
         return (
             <div className="text-dune p-text-body-md font-medium cursor-pointer">{text}</div>
@@ -14,7 +16,10 @@ const Footer = () => {
                 width={32}
                 height={32}
                 alt={alt}
-                className="cursor-pointer"
+                onClick={(e) => {
+                    window.open(cta)
+                }}
+                className="cursor-pointer max-h-[32px]"
             />
         )
     }
@@ -36,22 +41,18 @@ const Footer = () => {
                 </div>
 
                 <div className="flex flex-row gap-x-[1rem] items-center">
-                    <Socmed
-                        src={"/icons/facebook.svg"}
-                        alt={"ic_facebook"}
-                    />
-                    <Socmed
-                        src={"/icons/linkedin.svg"}
-                        alt={"ic_linkedin"}
-                    />
-                    <Socmed
-                        src={"/icons/instagram.svg"}
-                        alt={"ic_instagram"}
-                    />
-                    <Socmed
-                        src={"/icons/youtube.svg"}
-                        alt={"ic_youtube"}
-                    />
+                    {
+                        data.map((item, key) => {
+                            return (
+                                <Socmed
+                                    key={key}
+                                    src={BASE_URL + item.image}
+                                    alt={item.image}
+                                    cta={item.url}
+                                />
+                            )
+                        })
+                    }
                 </div>
             </div>
             <hr className="mt-[2rem] mb-[1.25rem]" />

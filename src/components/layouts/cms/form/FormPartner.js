@@ -11,7 +11,7 @@ export function FormDatatablePartner({ initialData, action, title = "Partner" })
     const [errors, setErrors] = useState({});
     const [formData, setFormData] = useState({
         title: initialData?.title || "",
-        imageUrl: BASE_URL + initialData?.image || "",
+        imageUrl: initialData?.image ? BASE_URL + initialData?.image : "",
         imageFile: {}
     })
     const [preview, setPreview] = useState(initialData?.image ? (BASE_URL + initialData?.image) : null);
@@ -71,7 +71,7 @@ export function FormDatatablePartner({ initialData, action, title = "Partner" })
             <form className="grid w-full items-center gap-4" onSubmit={handleSubmit}>
                 <AppInputGroup
                     id="title"
-                    placeholder={"Input your title text here.."}
+                    placeholder={"Input title text here.."}
                     value={formData.title}
                     isError={errors?.title}
                     label={"Title"}
@@ -80,7 +80,7 @@ export function FormDatatablePartner({ initialData, action, title = "Partner" })
 
                 <AppInputGroup
                     id="image"
-                    placeholder={"Input your image text here.."}
+                    placeholder={"Input image text here.."}
                     isError={errors?.imageFile}
                     label={"Image"}
                     type={"image"}
@@ -135,7 +135,7 @@ export function FormPartner({ title = "Partners", initialData, action }) {
             <form className="grid w-full items-center gap-4" onSubmit={handleSubmit}>
                 <AppInputGroup
                     id="title"
-                    placeholder={"Input your title text here.."}
+                    placeholder={"Input title text here.."}
                     value={formData.title}
                     isError={errors?.title}
                     label={"Title"}

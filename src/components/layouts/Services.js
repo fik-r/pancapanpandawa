@@ -8,7 +8,7 @@ const Services = ({ data }) => {
     const Item = ({ data }) => {
         return (
             <div className="flex flex-col w-full lg:h-[21.125rem] border-[1px] border-primary rounded-[1rem] bg-ghost p-[1rem] lg:p-[1.5rem]">
-                <div className="w-[1.5rem] h-[1.5rem] lg:w-[2rem] lg:h-[2rem] relative mb-[0.75rem] lg:mb-[1rem]">
+                <div className="w-[1.5rem] h-[1.5rem] max-w-[1.5rem] max-h-[1.5rem] lg:w-[2rem] lg:h-[2rem] relative mb-[0.75rem] lg:mb-[1rem]">
                     <Image
                         src={BASE_URL + data.image}
                         layout="fill"
@@ -35,7 +35,7 @@ const Services = ({ data }) => {
             <span className="p-text-body-sm lg:p-text-body-md text-carbon mt-[1rem] lg:mt-[1.5rem] mb-[1.5rem] lg:mb-[3rem] leading-[1.5rem] lg:leading-[1.875rem]">
                 {data.description}
             </span>
-            <div className="flex flex-col gap-y-[1rem] lg:grid lg:grid-cols-4 lg:gap-y-[0px] lg:gap-x-[1.5rem] overflow-x-auto">
+            <div className="flex flex-col gap-y-[1rem] lg:grid lg:grid-cols-4 lg:gap-y-[0px] lg:gap-[1.5rem] overflow-x-auto">
                 {
                     data.items.map((item, index) => {
                         return (

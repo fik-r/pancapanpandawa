@@ -20,6 +20,8 @@ import {
     CollapsibleTrigger
 } from "@/components/ui/collapsible"
 
+import { deleteSession } from "@/lib/actions/AuthActions"
+
 const items = [
     {
         title: "Pages",
@@ -44,6 +46,11 @@ const items = [
                 url: "/cms/contact",
                 icon: ChevronRight,
             },
+            {
+                title: "Career",
+                url: "/cms/career",
+                icon: ChevronRight,
+            },
         ]
     },
     {
@@ -66,6 +73,10 @@ const items = [
                 url: "/cms/testimonials",
             },
             {
+                title: "Core Values",
+                url: "/cms/corevalues",
+            },
+            {
                 title: "Visi Mission",
                 url: "/cms/missions",
             },
@@ -84,6 +95,31 @@ const items = [
             {
                 title: "Contacts",
                 url: "/cms/contacts",
+            },
+            {
+                title: "Careers",
+                url: "/cms/careers"
+            },
+            {
+                title: "Social Media",
+                url: "/cms/socmed"
+            },
+            {
+                title: "Contact Form",
+                url: "/cms/contact_form"
+            },
+        ]
+    },
+    {
+        title: "Account",
+        menus: [
+            {
+                title: "Change Password",
+                url: "/cms/change_password",
+            },
+            {
+                title: "Logout",
+                url: "logout",
             },
         ]
     }
@@ -110,7 +146,9 @@ const AppSidebar = () => {
                                                 return (
                                                     <SidebarMenuSub key={menu.title}>
                                                         <SidebarMenuSubButton asChild>
-                                                            <a href={menu.url}>
+                                                            <a href={menu.url == "logout" ? "#" : menu.url} onClick={async () => {
+                                                                await deleteSession()
+                                                            }}>
                                                                 <span>{menu.title}</span>
                                                             </a>
                                                         </SidebarMenuSubButton>

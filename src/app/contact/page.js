@@ -5,14 +5,18 @@ import Footer from "@/components/layouts/Footer";
 import ContactForm from "@/components/layouts/ContactForm";
 import { getContact } from "@/lib/actions/ContactpageActions";
 import { getContacts } from "@/lib/actions/ContactActions";
+import { getSocialMedia } from "@/lib/actions/SocialMediaActions";
+
 export const dynamic = 'force-dynamic'
 export default async function Contact() {
     const [
         contactpageData,
-        contactsData
+        contactsData,
+        socialMediaData,
     ] = await Promise.all([
         getContact(),
-        getContacts()
+        getContacts(),
+        getSocialMedia()
     ])
     const data = {
         ...contactpageData,
@@ -30,7 +34,7 @@ export default async function Contact() {
                 <ContactDetail data={data?.contact} />
                 <ContactForm />
             </div>
-            <Footer />
+            <Footer data={socialMediaData} />
         </div>
     )
 }

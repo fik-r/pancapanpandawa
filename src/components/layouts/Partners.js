@@ -13,6 +13,7 @@ const Partners = ({ data }) => {
                             src={BASE_URL + item.image}
                             width={240}
                             height={100}
+                            className="max-h-[100px]"
                             alt={item.title} />
                     )
                 })}

@@ -30,6 +30,25 @@ export async function login(data) {
 
 }
 
+
+export async function changePassword(data) {
+    console.log(data.oldPassword)
+    const user = await UserSchema.findOne({ password: data.oldPassword });
+    console.log(user)
+    try {
+        if (user) {
+            await UserSchema.findByIdAndUpdate(user._id, {
+                password: data.newPassword
+            }, { new: true });
+            return true
+        }
+        return false
+    } catch (e) {
+        return false
+    }
+
+}
+
 export async function deleteSession() {
     const cookieStore = await cookies()
     cookieStore.delete('session')

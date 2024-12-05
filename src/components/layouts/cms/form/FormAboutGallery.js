@@ -7,7 +7,7 @@ import { BASE_URL } from "@/lib/utils";
 export default function FormAboutGallery({ initialData, action }) {
     const [errors, setErrors] = useState({});
     const [formData, setFormData] = useState({
-        imageUrl: BASE_URL + initialData?.image || "",
+        imageUrl: initialData?.image ? BASE_URL + initialData?.image : "",
         imageFile: {},
     })
     const [preview, setPreview] = useState(initialData?.image ? (BASE_URL + initialData?.image) : null);
@@ -57,7 +57,7 @@ export default function FormAboutGallery({ initialData, action }) {
             <form className="grid w-full items-center gap-4" onSubmit={handleSubmit}>
                 <AppInputGroup
                     id="image"
-                    placeholder={"Input your image text here.."}
+                    placeholder={"Input image text here.."}
                     isError={errors?.imageFile}
                     label={"Image"}
                     type={"image"}
