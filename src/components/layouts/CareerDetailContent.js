@@ -5,7 +5,6 @@ import Link from "next/link";
 import DOMPurify from "dompurify"
 
 export default function CareerDetailContent({ data }) {
-    console.log(data)
     const LeftItem = ({ label, text }) => {
         return (
             <div className="flex flex-col py-[1rem] lg:py-[1.5rem] gap-y-[1rem] border-b border-[#E3E3E3]">

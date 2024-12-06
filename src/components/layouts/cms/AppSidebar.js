@@ -20,7 +20,8 @@ import {
     CollapsibleTrigger
 } from "@/components/ui/collapsible"
 
-import { deleteSession } from "@/lib/actions/AuthActions"
+import { useRouter } from "next/navigation"
+import { logout } from "@/lib/actions/AuthActions"
 
 const items = [
     {
@@ -126,6 +127,7 @@ const items = [
 ]
 
 const AppSidebar = () => {
+    const router = useRouter()
     return (
         <Sidebar>
             <SidebarContent>
@@ -147,7 +149,8 @@ const AppSidebar = () => {
                                                     <SidebarMenuSub key={menu.title}>
                                                         <SidebarMenuSubButton asChild>
                                                             <a href={menu.url == "logout" ? "#" : menu.url} onClick={async () => {
-                                                                await deleteSession()
+                                                                await logout();
+                                                                router.replace("/login")
                                                             }}>
                                                                 <span>{menu.title}</span>
                                                             </a>

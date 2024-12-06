@@ -18,7 +18,6 @@ export default function FormDatatableSocialMedia({ title = "Social Media", initi
         e.preventDefault()
         let newErrors = {};
         let isValid = true;
-        console.log(formData.imageUrl)
         Object.keys(formData).forEach((key) => {
             if (key !== "imageUrl") {
                 if (key === "imageFile") {

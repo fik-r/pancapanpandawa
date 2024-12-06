@@ -73,7 +73,7 @@ const OurServices = ({ data }) => {
                 <TabsList className="mb-[2rem]">
                     {data?.items?.map((item, key) => {
                         return (
-                            <TabsTrigger value={item.title} key={key}>Security</TabsTrigger>
+                            <TabsTrigger value={item.title} key={key}>{item.title}</TabsTrigger>
                         )
                     })}
                 </TabsList>

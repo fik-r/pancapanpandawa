@@ -1,9 +1,11 @@
-import ReactQuill from 'react-quill-new';
-import 'quill/dist/quill.snow.css';
+"use client"
+import dynamic from 'next/dynamic';
+
+const QuillNoSSR = dynamic(() => import('react-quill-new'), { ssr: false });
 
 export default function AppWYSIWYG({ value, onModelChange, placeholder = "Edit Your Content Here!" }) {
     return (
-        <ReactQuill
+        <QuillNoSSR
             value={value} // Controlled editor value
             onChange={onModelChange} // Update parent state
             placeholder={placeholder} // Placeholder text

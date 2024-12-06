@@ -1,56 +1,41 @@
-"use server"
-import 'server-only'
-import { cookies } from 'next/headers'
+"use server";
+import { SECRET_KEY } from '../utils';
+import { SignJWT } from 'jose';
+import { cookies } from 'next/headers'; // Built-in cookie management
 import UserSchema from "@/models/User"
-import { redirect } from 'next/navigation'
-import { encrypt, decrypt } from '@/lib/actions/SessionActions'
 
-export async function createSession(username) {
-    const expiresAt = new Date(Date.now() + 24 * 60 * 60 * 1000)
-    const session = await encrypt({ username, expiresAt })
-    const cookieStore = await cookies()
-
-    cookieStore.set('session', session, {
-        httpOnly: true,
-        secure: true,
-        expires: expiresAt,
-        sameSite: 'lax',
-        path: '/',
-    })
-}
+const secretKey = new TextEncoder().encode(SECRET_KEY);
 
 export async function login(data) {
-    const user = await UserSchema.findOne({ username: data.username, password: data.password })
+    const user = await UserSchema.findOne({ username: data.username, password: data.password });
     if (user) {
-        await createSession(data.username)
-        return true;
+        // Generate JWT using jose
+        const token = await new SignJWT({ username: user.username })
+            .setProtectedHeader({ alg: 'HS256' })
+            .setExpirationTime('1d')
+            .sign(secretKey);
+
+        // Set HTTP-only cookie
+        cookies().set('authToken', token, {
+            httpOnly: true,
+            secure: true,
+            path: '/',
+            maxAge: 24 * 60 * 60, // 1 day
+            sameSite: 'lax',
+        });
+
+        return { isValid: true };
     } else {
-        return false
+        return { isValid: false };
     }
-
 }
 
-
-export async function changePassword(data) {
-    console.log(data.oldPassword)
-    const user = await UserSchema.findOne({ password: data.oldPassword });
-    console.log(user)
-    try {
-        if (user) {
-            await UserSchema.findByIdAndUpdate(user._id, {
-                password: data.newPassword
-            }, { new: true });
-            return true
-        }
-        return false
-    } catch (e) {
-        return false
-    }
-
-}
-
-export async function deleteSession() {
-    const cookieStore = await cookies()
-    cookieStore.delete('session')
-    redirect("/login")
+export async function logout() {
+    // Clear the cookie by setting it with an expired date
+    cookies().set('authToken', '', {
+        httpOnly: true,
+        secure: true,
+        path: '/',
+        expires: new Date(0), // Expired date
+    });
 }
