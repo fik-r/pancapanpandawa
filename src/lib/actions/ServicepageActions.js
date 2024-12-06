@@ -35,6 +35,7 @@ export async function updateHeroServicepage(newData) {
 
         return true;
     } catch (e) {
+        console.log(e)
         return false
     }
 }
