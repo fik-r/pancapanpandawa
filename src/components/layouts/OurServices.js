@@ -28,8 +28,8 @@ const OurServices = ({ data }) => {
     const [selectedValue, setSelectedValue] = useState(
         queryValue ? queryValue : data?.items[0].title
     )
-    const CollapsibleContent = ({ title, content }) => {
-        const [isExpand, setIsExpand] = useState(false)
+    const CollapsibleContent = ({ title, content, expand }) => {
+        const [isExpand, setIsExpand] = useState(expand)
 
         return (
             <div className="py-[1.5rem] lg:py-[2rem] border-b border-[#E3E3E3]">
@@ -69,7 +69,7 @@ const OurServices = ({ data }) => {
                 <span className="text-dune font-bold p-text-heading-sm lg:p-text-display-lg">{data?.title}</span>
                 <span className="w-full lg:w-[50%] text-carbon leading-[1.5rem] lg:leading-[1.875rem] p-text-body-sm lg:p-text-body-md">{data?.description}</span>
             </div>
-            <Tabs defaultValue={data?.items[0]?.title} className="hidden lg:block w-full mt-[2rem]">
+            <Tabs defaultValue={selectedValue} className="hidden lg:block w-full mt-[2rem]">
                 <TabsList className="mb-[2rem]">
                     {data?.items?.map((item, key) => {
                         return (
@@ -84,6 +84,7 @@ const OurServices = ({ data }) => {
                                 {item?.details?.map((detail, detailKey) => {
                                     return (
                                         <CollapsibleContent
+                                            expand={detailKey == 0}
                                             key={detailKey}
                                             title={detail.title}
                                             content={detail.html} />
@@ -118,6 +119,7 @@ const OurServices = ({ data }) => {
                     {data?.items?.filter(item => item.title == selectedValue)[0].details?.map((detail, key) => {
                         return (
                             <CollapsibleContent
+                                expand={key == 0}
                                 key={key}
                                 title={detail.title}
                                 content={detail.html} />
