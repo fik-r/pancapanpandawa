@@ -149,8 +149,10 @@ const AppSidebar = () => {
                                                     <SidebarMenuSub key={menu.title}>
                                                         <SidebarMenuSubButton asChild>
                                                             <a href={menu.url == "logout" ? "#" : menu.url} onClick={async () => {
-                                                                await logout();
-                                                                router.replace("/login")
+                                                                if(menu.url == "logout") {
+                                                                    await logout();
+                                                                    router.replace("/login")
+                                                                }
                                                             }}>
                                                                 <span>{menu.title}</span>
                                                             </a>

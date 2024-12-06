@@ -6,6 +6,21 @@ import UserSchema from "@/models/User"
 
 const secretKey = new TextEncoder().encode(SECRET_KEY);
 
+export async function changePassword(data) {
+    const user = await UserSchema.findOne({ password: data.oldPassword });
+    try {
+        if (user) {
+            await UserSchema.findByIdAndUpdate(user._id, {
+                password: data.newPassword
+            }, { new: true });
+            return true
+        }
+        return false
+    } catch (e) {
+        return false
+    }
+}
+
 export async function login(data) {
     const user = await UserSchema.findOne({ username: data.username, password: data.password });
     if (user) {
@@ -16,7 +31,8 @@ export async function login(data) {
             .sign(secretKey);
 
         // Set HTTP-only cookie
-        cookies().set('authToken', token, {
+        const cookiesStore = cookies()
+        await cookiesStore.set('authToken', token, {
             httpOnly: true,
             secure: true,
             path: '/',
@@ -32,7 +48,8 @@ export async function login(data) {
 
 export async function logout() {
     // Clear the cookie by setting it with an expired date
-    cookies().set('authToken', '', {
+    const cookiesStore = cookies()
+    await cookiesStore.set('authToken', '', {
         httpOnly: true,
         secure: true,
         path: '/',
