@@ -37,31 +37,12 @@ const CarouselGallery = ({ data }) => {
 }
 
 const ServiceGallery = ({ data }) => {
-    const topRowItems = data?.items?.slice(0, 2);
-    const bottomRowItems = data?.items?.slice(2);
     return (
         <div className="flex flex-col px-[1.5rem] py-[2.5rem] lg:p-[3.75rem]">
             <span className="p-text-heading-sm lg:p-text-display-lg font-bold text-dune mb-[1.5rem] lg:mb-[3rem]">{data?.heading}</span>
-            <div className="flex flex-col lg:grid lg:grid-cols-2 lg:gap-x-[1.5rem] gap-y-[1rem] lg:mb-[1.5rem]">
-                {topRowItems.map((item, index) => (
-                    <SingleGallery
-                        key={index}
-                        isRounded={true}
-                        alt={"servicegallery"}
-                        url={BASE_URL + item.image}
-                        height={"lg:h-[19.5rem] h-[15rem]"}
-                    />
-                ))}
-            </div>
-            <div className="flex flex-col mt-[1rem] lg:grid lg:grid-cols-3 gap-y-[1rem] lg:gap-x-[1.5rem]">
-                {bottomRowItems.map((item, index) => (
-                    <SingleGallery
-                        key={index}
-                        isRounded={true}
-                        alt={"servicegallery"}
-                        url={BASE_URL + item.image}
-                        height={"lg:h-[19.5rem] h-[15rem]"}
-                    />
+            <div className="columns-3 gap-3 space-y-4">
+                {data?.items?.map((item, index) => (
+                    <img key={index} src={BASE_URL + item.image} className="rounded-md" />
                 ))}
             </div>
         </div>

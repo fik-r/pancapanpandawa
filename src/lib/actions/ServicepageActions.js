@@ -3,11 +3,17 @@ import { uploadImage } from "@/lib/actions/UtilsActions";
 import ServicepageSchema from "@/models/Servicepage";
 
 async function updateServicepage(section) {
-    let firstItem = await ServicepageSchema.findOne().sort({ createdAt: 1 });
-    if (firstItem) {
-        await ServicepageSchema.findByIdAndUpdate(firstItem._id, section, { new: true });
-    } else {
-        await ServicepageSchema.create(section);
+    try {
+        let firstItem = await ServicepageSchema.findOne().sort({ createdAt: 1 });
+        if (firstItem) {
+            await ServicepageSchema.findByIdAndUpdate(firstItem._id, section, { new: true });
+        } else {
+            await ServicepageSchema.create(section);
+        }
+        return true
+    } catch (e) {
+        console.log(e)
+        return false
     }
 }
 

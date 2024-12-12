@@ -7,10 +7,10 @@ import {
 
 const Testimonials = ({ data }) => {
     const Item = ({ data }) => {
-        const cardClass = "rounded-lg border border-[#EAEAEA] bg-white shadow-[0px_90px_55px_0px_rgba(0,0,0,0.02),0px_10px_30px_0px_rgba(0,0,0,0.03)]"
+        const cardClass = "rounded-lg border border-[#EAEAEA] bg-white"
         return (
             <div className={`flex flex-col ${cardClass} p-[1rem] lg:p-[2rem]`}>
-                <div className="font-semibold p-text-body-lg lg:p-text-heading-md h-[13.875rem] mb-[1rem] leading-[2rem]">{`“${data?.comment}”`}</div>
+                <div className="font-semibold p-text-body-lg lg:p-text-heading-md h-[8.75rem] lg:h-[13.875rem] line-clamp-4 lg:line-clamp-6 mb-[1rem] leading-[2rem]">{`“${data?.comment}”`}</div>
                 <div className="flex flex-row gap-x-[0.313rem] mb-[1rem]">
                     <Image src={"/icons/ic_star.svg"}
                         width={16}
@@ -47,7 +47,7 @@ const Testimonials = ({ data }) => {
                         return (
                             <CarouselItem
                                 key={key}
-                                className="basis-11/12 lg:basis-1/3">
+                                className="basis-11/12 lg:basis-1/3 shadow-[0px_90px_55px_0px_rgba(0,0,0,0.02),0px_10px_30px_0px_rgba(0,0,0,0.03)]">
                                 <Item
                                     data={item} />
                             </CarouselItem>

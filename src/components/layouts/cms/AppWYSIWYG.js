@@ -1,6 +1,6 @@
 "use client"
 import dynamic from 'next/dynamic';
-
+import 'react-quill-new/dist/quill.snow.css';
 const QuillNoSSR = dynamic(() => import('react-quill-new'), { ssr: false });
 
 export default function AppWYSIWYG({ value, onModelChange, placeholder = "Edit Your Content Here!" }) {
