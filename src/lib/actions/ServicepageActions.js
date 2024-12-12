@@ -12,7 +12,6 @@ async function updateServicepage(section) {
         }
         return true
     } catch (e) {
-        console.log(e)
         return false
     }
 }
