@@ -14,7 +14,7 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'pancapandawasukses.id',
         port: '',
-        pathname: '/api/uploads/',
+        pathname: '/api/uploads/**',
       },
     ],
   },
