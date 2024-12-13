@@ -9,13 +9,12 @@ const nextConfig = {
     },
   },
   images: {
-    domains: ['localhost', "pancapandawasukses.id"],
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'picsum.photos',
+        hostname: 'pancapandawasukses.id',
         port: '',
-        pathname: '/**',
+        pathname: '/api/uploads/',
       },
     ],
   },
