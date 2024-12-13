@@ -1,1 +1,0 @@
-self.__REACT_LOADABLE_MANIFEST='{"components\\\\layouts\\\\cms\\\\AppWYSIWYG.js -> react-quill-new":{"id":43901,"files":["static/chunks/3901.2e996bb654e65d2f.js"]}}';

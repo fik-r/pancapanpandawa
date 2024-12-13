@@ -9,7 +9,7 @@ const nextConfig = {
     },
   },
   images: {
-    domains: ['localhost', "pancapandawasukses.id", "flowbite.s3.amazonaws.com"],
+    domains: ['localhost', "pancapandawasukses.id"],
     remotePatterns: [
       {
         protocol: 'https',
