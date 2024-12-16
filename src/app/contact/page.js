@@ -21,7 +21,7 @@ export default async function Contact() {
     const data = {
         ...contactpageData,
         contact: {
-            ...contactpageData.contact,
+            ...contactpageData?.contact,
             items: contactsData
         }
     }
