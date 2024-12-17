@@ -10,7 +10,7 @@ import { getSocialMedia } from "@/lib/actions/SocialMediaActions";
 export const dynamic = 'force-dynamic'
 
 export default async function CareerDetail({ params }) {
-    const { id } = params;
+    const { id } = await params;
     const [
         careerpageData,
         careerData,
