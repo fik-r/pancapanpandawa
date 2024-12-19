@@ -1,7 +1,7 @@
 export default function ContactDetail({ data }) {
-    const LeftItem = ({ label, text }) => {
+    const LeftItem = ({ label, text, showBorder }) => {
         return (
-            <div className="flex flex-col py-[1rem] lg:py-[1.5rem] gap-y-[1rem] border-b border-[#E3E3E3]">
+            <div className={`flex flex-col py-[1rem] lg:py-[1.5rem] gap-y-[1rem] ${showBorder ? "border-b border-[#E3E3E3]" : ""}`}>
                 <span className="font-bold p-text-body-lg lg:p-text-heading-md text-dune">{label}</span>
                 <span className="font-medium text-dune p-text-body-md lg:p-text-heading-sm">
                     {text}
@@ -18,7 +18,7 @@ export default function ContactDetail({ data }) {
             <div className="flex flex-col">
                 {data?.items?.map((item, key) => {
                     return (
-                        <LeftItem key={key} label={item.title} text={item.description} />
+                        <LeftItem key={key} label={item.title} text={item.description} showBorder={data?.items?.length - 1 != key} />
                     )
                 })}
             </div>

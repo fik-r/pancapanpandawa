@@ -5,9 +5,12 @@ import { Button } from "@/components/ui/button"
 import { Toaster } from "../ui/toaster"
 import { useToast } from "@/hooks/use-toast"
 import { createContactForm } from "@/lib/actions/ContactFormActions"
-import { useState } from "react"
+import { useState, useRef } from "react"
 import Loading from "./Loading"
+import ReCAPTCHA from "react-google-recaptcha"
+import { verifyCaptcha } from "@/lib/actions/ContactFormActions"
 const ContactForm = () => {
+    const recaptchaRef = useRef(null)
     const { toast } = useToast()
     const [loading, setLoading] = useState(false)
     const [formData, setFormData] = useState({
@@ -16,10 +19,21 @@ const ContactForm = () => {
         phoneNumber: "",
         message: "",
     })
+    const [isVerified, setIsverified] = useState(false)
 
     function handleInputChange(e) {
         const { id, value } = e.target;
         setFormData({ ...formData, [id]: value });
+    }
+
+    async function handleCaptchaSubmission(token) {
+        await verifyCaptcha(token)
+            .then(() => {
+                setIsverified(true)
+            })
+            .catch(() => {
+                setIsverified(false)
+            })
     }
 
     async function handleSubmit() {
@@ -35,7 +49,7 @@ const ContactForm = () => {
             }
         });
 
-        if (!isValid) {
+        if (!isValid || !isVerified) {
             toast({
                 variant: "destructive",
                 description: "Fill required form!",
@@ -79,6 +93,11 @@ const ContactForm = () => {
                 placeholder="Input message here"
                 className="p-text-body-md rounded-lg"
                 onChange={handleInputChange}
+            />
+            <ReCAPTCHA
+                sitekey={"6LfACqAqAAAAAOPXj2dM7kl1-hPC4S6ZKwOLAPdO"}
+                ref={recaptchaRef}
+                onChange={handleCaptchaSubmission}
             />
             <span className="p-text-body-sm lg:p-text-body-md text-[#343434]">
                 By completing this form, you agree that the information provided may be stored and handled in accordance with our <u className="cursor-pointer">Privacy Policy</u>.

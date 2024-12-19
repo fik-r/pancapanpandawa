@@ -32,6 +32,7 @@ export default async function Contact() {
             <Hero2 data={data?.hero} />
             <div className="flex flex-col lg:grid lg:grid-cols-2 px-[1.5rem] py-[2.5rem] lg:px-[3.75rem] lg:py-[6.25rem] lg:gap-x-[3rem] lg:mb-[10.625rem]">
                 <ContactDetail data={data?.contact} />
+                <hr className="lg:hidden my-[2.5rem]"/>
                 <ContactForm />
             </div>
             <Footer data={socialMediaData} />

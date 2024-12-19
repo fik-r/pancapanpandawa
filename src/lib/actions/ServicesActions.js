@@ -8,17 +8,18 @@ export async function createOrUpdateService(newData, id) {
         const urlImage = newData.image.name ? await uploadImage(newData.image) : newData.imageUrl
         const data = {
             ...newData,
-            _id: id || uuidv4(),
+            id: id || uuidv4(),
             image: urlImage,
         }
         if (id) {
-            await ServicesSchema.findByIdAndUpdate(id, data, { new: true });
+            await ServicesSchema.updateOne(data);
         } else {
             await ServicesSchema.create(data);
         }
 
         return true;
     } catch (e) {
+        console.log(e)
         return false
     }
 
@@ -26,7 +27,7 @@ export async function createOrUpdateService(newData, id) {
 
 export async function deleteService(id) {
     try {
-        await ServicesSchema.deleteOne({ _id: id })
+        await ServicesSchema.deleteOne({ id: id })
         return true
     } catch (e) {
         return false
@@ -34,6 +35,6 @@ export async function deleteService(id) {
 }
 
 export async function getServices() {
-    const list = await ServicesSchema.find().sort({ createdAt: 1 }).select('_id -__v').lean();
+    const list = await ServicesSchema.find().sort({ createdAt: 1 }).select('-_id -__v -details._id').lean();
     return list
 }

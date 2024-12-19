@@ -27,3 +27,17 @@ export async function getContactForms() {
         _id: item._id.toString()
     }));
 }
+
+
+export async function verifyCaptcha(token) {
+    const res = await fetch(
+        `https://www.google.com/recaptcha/api/siteverify?secret=6LfACqAqAAAAAMPBMVIIhtWUzdG5AOhAHc5U4AME&response=${token}`, {
+        method: "POST"
+    }
+    )
+    if (res.status == 200) {
+        return "success!"
+    } else {
+        throw new Error("Failed Captcha")
+    }
+}

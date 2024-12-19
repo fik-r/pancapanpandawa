@@ -124,7 +124,7 @@ export function FormDatatableServices({ title = "Services", initialData = {}, ac
 
         const processedDetails = formData.details.map((detail) => ({
             ...detail,
-            _id: detail._id || uuidv4() // Use existing id if present, otherwise generate a new one
+            id: detail.id || uuidv4() // Use existing id if present, otherwise generate a new one
         }));
 
         const formDataInSchema = {
@@ -136,7 +136,7 @@ export function FormDatatableServices({ title = "Services", initialData = {}, ac
         }
 
         if (action)
-            action(formDataInSchema, initialData._id)
+            action(formDataInSchema, initialData.id)
     }
 
     function handleInputChange(e) {
@@ -241,7 +241,7 @@ export function FormDatatableServices({ title = "Services", initialData = {}, ac
                     <Button type="button" className="bg-green-500 hover:bg-green-600" onClick={addDetail}>{"Add Detail"}</Button>
                 </div>
                 <div className="text-end">
-                    <Button type="submit">{initialData?._id ? "Update" : "Add"}</Button>
+                    <Button type="submit">{initialData?.id ? "Update" : "Add"}</Button>
                 </div>
             </form>
         </AppSection>
