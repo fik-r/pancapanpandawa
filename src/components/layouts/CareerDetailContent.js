@@ -2,9 +2,27 @@
 import { Button } from "@/components/ui/button";
 import { ChevronLeft } from "lucide-react";
 import Link from "next/link";
-import DOMPurify from "dompurify"
+import DOMPurify from "isomorphic-dompurify"
+import { redirect, useSearchParams } from "next/navigation"
+import { useEffect, useState } from "react";
+import { getCareer } from "@/lib/actions/CareerActions";
 
-export default function CareerDetailContent({ data }) {
+export default function CareerDetailContent() {
+    const searchParams = useSearchParams();
+    const queryValue = searchParams.get("q");
+    const [data, setData] = useState()
+
+    async function fetchData() {
+        if (queryValue == "" || !queryValue) {
+            redirect("/career")
+            return;
+        }
+        const data = await getCareer(queryValue)
+        setData(data)
+    }
+    useEffect(() => {
+        fetchData()
+    }, [])
     const LeftItem = ({ label, text }) => {
         return (
             <div className="flex flex-col py-[1rem] lg:py-[1.5rem] gap-y-[1rem] border-b border-[#E3E3E3]">
@@ -43,9 +61,9 @@ export default function CareerDetailContent({ data }) {
                     <LeftItem label={"Years of Experienec"} text={data?.yearsOfExp} />
                 </div>
                 <div className="lg:col-span-3 flex flex-col gap-y-[2rem]">
-                    <RightItem label={"Job Description"} text={data?.jobDesc}/>
-                    <RightItem label={"Job Qualification"} text={data?.jobQualification}/>
-                    <RightItem label={"Perks & Benefit"} text={data?.perks}/>
+                    <RightItem label={"Job Description"} text={data?.jobDesc} />
+                    <RightItem label={"Job Qualification"} text={data?.jobQualification} />
+                    <RightItem label={"Perks & Benefit"} text={data?.perks} />
                 </div>
             </div>
         </div>

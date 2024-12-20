@@ -10,7 +10,7 @@ const LandingCareer = ({ data }) => {
                 <span className="p-text-body-lg lg:p-text-heading-md text-dune font-medium">
                     {item.title}
                 </span>
-                <Link href={"/career/" + item._id}>
+                <Link href={"/career/detail?q=" + item._id}>
                     <Button className="w-[8.188rem] rounded-full p-text-body-sm font-semibold">
                         Job Details
                         <ChevronRight className="h-4 w-4" />

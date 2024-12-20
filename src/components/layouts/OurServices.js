@@ -19,7 +19,7 @@ import {
 } from "lucide-react"
 import Image from "next/image"
 import { useState } from "react"
-import DOMPurify from "dompurify"
+import DOMPurify from "isomorphic-dompurify"
 import { useSearchParams } from "next/navigation"
 
 const OurServices = ({ data }) => {

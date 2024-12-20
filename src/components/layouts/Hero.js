@@ -35,9 +35,9 @@ const Hero1 = ({ data }) => {
                 variant="outline"
             >Learn more</Button>
             <div className="hero-info flex flex-col lg:grid lg:grid-cols-3 p-[1.5rem] lg:p-[2rem] mt-[3rem] lg:mt-[3.75rem] gap-y-[1rem] lg:gap-y-[0rem]">
-                <Info label={data?.highlight_1.label} value={data?.highlight_1.value} />
-                <Info label={data?.highlight_2.label} value={data?.highlight_2.value} />
-                <Info label={data?.highlight_3.label} value={data?.highlight_3.value} />
+                <Info label={data?.highlight_1?.label} value={data?.highlight_1?.value} />
+                <Info label={data?.highlight_2?.label} value={data?.highlight_2?.value} />
+                <Info label={data?.highlight_3?.label} value={data?.highlight_3?.value} />
             </div>
         </div>
     )
